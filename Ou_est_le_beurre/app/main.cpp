@@ -8,15 +8,17 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "ou_est_le_beurre/globals.hpp"
+#include "ou_est_le_beurre/Game.hpp"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
+    sf::RenderWindow window(sf::VideoMode(globals::WIDTH, globals::HEIGHT), "Où est le beurre?");
+    Game game;
 
     while (window.isOpen())
     {
+        // TODO input
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -24,9 +26,13 @@ int main()
                 window.close();
         }
 
-        window.clear();
-        window.draw(shape);
-        window.display();
+        // update
+        game.update(0);
+
+
+        // draw
+        game.draw(window);
+
     }
 
     return 0;
