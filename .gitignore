@@ -2,3 +2,5 @@
 Ou_est_le_beurre/.cproject
 Ou_est_le_beurre/.project
 Ou_est_le_beurre/.settings/language.settings.xml
+.idea/
+cmake-build-debug/
