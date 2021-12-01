@@ -19,7 +19,22 @@ void Game::update(float delta_t)
 
 void Game::draw(sf::RenderWindow &window)
 {
-    window.clear();
+    window.clear(sf::Color::White);
+
+    // draw collision map (for testing)
+    for (int y = 0; y < globals::YTILECOUNT; ++y) {
+    	for (int x = 0; x < globals::XTILECOUNT; ++x) {
+
+    		if(globals::collision_map[y][x]) {
+
+        		sf::RectangleShape rect(sf::Vector2f(globals::TILESIZE, globals::TILESIZE));
+        		rect.setPosition(x * globals::TILESIZE, y * globals::TILESIZE);
+    			rect.setFillColor(sf::Color::Black);
+
+    			window.draw(rect);
+    		}
+    	}
+	}
 
     window.draw(player);
     //window.draw(Momy.png);

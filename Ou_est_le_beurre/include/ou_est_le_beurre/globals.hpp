@@ -7,13 +7,30 @@
 
 #include <string>
 
-#define TEXTURES_PATH std::string("resources/textures/")	// ../resources/textures/
+//#define TEXTURES_PATH std::string("../resources/textures/")
+#define TEXTURES_PATH std::string("resources/textures/")
 
 namespace globals{
 	const int TILESIZE = 32;
 
-    const int WIDTH = 800;
-    const int HEIGHT = 600;
+	const int XTILECOUNT = 10;
+	const int YTILECOUNT = 10;
+
+    const int WIDTH  = XTILECOUNT * TILESIZE;
+    const int HEIGHT = YTILECOUNT * TILESIZE;
+
+    // TODO mit richtigem Bild von Schnuggi abgleichen ggf überarbeiten
+    const char collision_map[YTILECOUNT][XTILECOUNT] =
+       {{ 1, 1, 1, 1, 0, 0, 1, 1, 1, 1 },
+		{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+		{ 1, 1, 1, 1, 0, 0, 1, 0, 0, 1 },
+		{ 1, 1, 1, 1, 0, 0, 1, 0, 0, 1 },
+		{ 1, 1, 1, 1, 0, 0, 1, 0, 0, 1 },
+		{ 1, 1, 1, 1, 0, 0, 1, 0, 0, 1 },
+		{ 1, 1, 1, 1, 1, 0, 1, 1, 1, 1 }};
 }
 
 #endif //OUESTLEBEURRE_GLOBALS_HPP

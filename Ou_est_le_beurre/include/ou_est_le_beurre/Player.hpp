@@ -12,6 +12,8 @@
 #include <string>
 #include "ou_est_le_beurre/globals.hpp"
 
+enum Direction { UP, LEFT, DOWN, RIGHT };
+
 class Player : public sf::Sprite
 {
 public:
@@ -26,7 +28,13 @@ private:
 private:
 	sf::Texture texture;
 
-	const float speed;	// time[s] / tile
+	// position + direction
+	sf::Vector2i gridPostion;	// position in grid postion(2 * TILESIZE, 3 * TILESIZE) -> gridPosition(2, 3)
+
+	Direction direction;
+
+	// moveTile
+	const float timePerTile;	// [s]
 };
 
 #endif /* INCLUDE_OU_EST_LE_BEURRE_PLAYER_HPP_ */
