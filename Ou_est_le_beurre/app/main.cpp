@@ -13,8 +13,15 @@ int main()
     sf::RenderWindow window(sf::VideoMode(globals::WIDTH, globals::HEIGHT), "Ou est le beurre?");
     Game game;
 
+    // delta_t + clock
+    sf::Clock clock;
+    float delta_t = 0;
+
     while (window.isOpen())
     {
+    	// get delta_t
+    	delta_t = clock.restart().asSeconds();
+
         // TODO input
         sf::Event event;
         while (window.pollEvent(event))
@@ -24,7 +31,7 @@ int main()
         }
 
         // update
-        game.update(0);
+        game.update(delta_t);
 
 
         // draw

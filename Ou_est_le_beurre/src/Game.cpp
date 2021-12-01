@@ -14,7 +14,7 @@ Game::Game() :
 
 void Game::update(float delta_t)
 {
-    player.move(0.01f, 0.f);
+    player.update(delta_t);
 }
 
 void Game::draw(sf::RenderWindow &window)
