@@ -1,9 +1,6 @@
 //============================================================================
 // Name        : Ou_est_le_beurre.cpp
 // Author      : Johannes Hofmann (coolster Bruder)
-// Version     : 1
-// Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
 //============================================================================
 
 #include <iostream>
@@ -13,7 +10,7 @@
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(globals::WIDTH, globals::HEIGHT), "Où est le beurre?");
+    sf::RenderWindow window(sf::VideoMode(globals::WIDTH, globals::HEIGHT), "Ou est le beurre?");
     Game game;
 
     while (window.isOpen())

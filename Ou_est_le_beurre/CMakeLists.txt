@@ -13,5 +13,13 @@ find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
 add_subdirectory(src)
 
 # executable
-add_executable(ouEstLeBeurre app/main.cpp src/Game.cpp include/ou_est_le_beurre/Game.hpp include/ou_est_le_beurre/globals.hpp)
+add_executable(ouEstLeBeurre 
+	app/main.cpp 
+	src/Game.cpp 
+	src/Player.cpp
+	include/ou_est_le_beurre/Game.hpp 
+	include/ou_est_le_beurre/Player.hpp 
+	include/ou_est_le_beurre/globals.hpp
+)
+
 target_link_libraries(ouEstLeBeurre sfml-graphics sfml-audio ouEstLeBeurreLib)

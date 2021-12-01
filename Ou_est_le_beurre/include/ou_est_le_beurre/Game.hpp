@@ -6,8 +6,10 @@
 #define OUESTLEBEURRE_GAME_HPP
 
 #include <SFML/Graphics.hpp>
-#include "ou_est_le_beurre/globals.hpp"
 #include <string>
+#include "ou_est_le_beurre/globals.hpp"
+#include "ou_est_le_beurre/Player.hpp"
+
 
 class Game {
 public:
@@ -19,9 +21,8 @@ public:
     void draw(sf::RenderWindow &);
 
 private:
-    // textrue
-    sf::Texture t_player;
-    sf::Sprite player;
+    // player
+    Player player;
 
 };
 

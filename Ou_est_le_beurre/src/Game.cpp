@@ -2,24 +2,19 @@
 // Created by paddy on 30.11.21.
 //
 
-#include "../include/ou_est_le_beurre/Game.hpp"
+#include "ou_est_le_beurre/Game.hpp"
 
 #include <iostream>
 
-Game::Game()
+Game::Game() :
+	player("Momy.png")
 {
-
-    if (!t_player.loadFromFile(TEXTURES_PATH + std::string("Momy.png")))
-    {
-        std::cerr << "error while loading player texture" << std::endl;
-    }
-    player.setTexture(t_player);
 
 }
 
 void Game::update(float delta_t)
 {
-    player.move(1, 2);
+    player.move(0.01f, 0.f);
 }
 
 void Game::draw(sf::RenderWindow &window)

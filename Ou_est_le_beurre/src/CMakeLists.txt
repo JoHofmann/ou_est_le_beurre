@@ -3,12 +3,12 @@ message(${ouEstLeBeurre_SOURCE_DIR})
 set(HEADER_LIST "${ouEstLeBeurre_SOURCE_DIR}/include/ou_est_le_beurre/")
 
 # --- add libraries ---
-add_library(ouEstLeBeurreLib Game.cpp ${HEADER_LIST})
+add_library(ouEstLeBeurreLib Game.cpp Player.cpp ${HEADER_LIST})
 
 # We need this directory, and users of our library will need it too
 target_include_directories(ouEstLeBeurreLib PUBLIC ../include)
 
-target_link_libraries(ouEstLeBeurreLib PUBLIC sfml-graphics)
+target_link_libraries(ouEstLeBeurreLib PUBLIC sfml-graphics sfml-audio)
 
 # This depends on (header only) boost
 #target_link_libraries(quaternionDmp PRIVATE Boost::boost)
