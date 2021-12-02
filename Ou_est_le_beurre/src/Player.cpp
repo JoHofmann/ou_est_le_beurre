@@ -53,28 +53,32 @@ void Player::moveTile(float delta_t) {
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { 			// move up
 			moveDirection = UP;
 
-			if(!globals::collision_map[gridPostion.y - 1][gridPostion.x]) {	// check if next field is accessable
+			if(inMap(gridPostion.y - 1, gridPostion.x) &&
+					!globals::collision_map[gridPostion.y - 1][gridPostion.x]) {	// check if next field is accessable
 				moving = true;
 			}
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {		// move left
 			moveDirection = LEFT;
 
-			if(!globals::collision_map[gridPostion.y][gridPostion.x - 1]) {	// check if next field is accessable
+			if(inMap(gridPostion.y, gridPostion.x - 1) &&
+					!globals::collision_map[gridPostion.y][gridPostion.x - 1]) {	// check if next field is accessable
 				moving = true;
 			}
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {		// move down
 			moveDirection = DOWN;
 
-			if(!globals::collision_map[gridPostion.y + 1][gridPostion.x]) {	// check if next field is accessable
+			if(inMap(gridPostion.y + 1, gridPostion.x) &&
+					!globals::collision_map[gridPostion.y + 1][gridPostion.x]) {	// check if next field is accessable
 				moving = true;
 			}
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {		// move right
 			moveDirection = RIGHT;
 
-			if(!globals::collision_map[gridPostion.y][gridPostion.x + 1]) {	// check if next field is accessable
+			if(inMap(gridPostion.y, gridPostion.x + 1) &&
+					!globals::collision_map[gridPostion.y][gridPostion.x + 1]) {	// check if next field is accessable
 				moving = true;
 			}
 		}
@@ -115,7 +119,10 @@ void Player::moveTile(float delta_t) {
 	}
 }
 
-
+// check if pos(x, y) is in map
+bool Player::inMap(int x, int y) {
+	return x >= 0 && y >= 0 && x < globals::XTILECOUNT && y < globals::YTILECOUNT;
+}
 
 
 

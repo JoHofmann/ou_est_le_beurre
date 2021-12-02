@@ -7,8 +7,7 @@
 
 #include <string>
 
-//#define TEXTURES_PATH std::string("../resources/textures/")
-#define TEXTURES_PATH std::string("resources/textures/")
+#define TEXTURES_PATH std::string("../resources/textures/")
 
 namespace globals{
 	const int TILESIZE = 32;

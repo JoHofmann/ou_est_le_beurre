@@ -24,6 +24,7 @@ public:
 
 private:
 	void moveTile(float);
+	bool inMap(int, int);
 
 private:
 	sf::Texture texture;
@@ -34,7 +35,7 @@ private:
 	Direction direction;
 
 	// moveTile
-	const float timePerTile;	// [s]
+	const float timePerTile;	// in seconds
 };
 
 #endif /* INCLUDE_OU_EST_LE_BEURRE_PLAYER_HPP_ */
