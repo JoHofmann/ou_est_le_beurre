@@ -9,6 +9,7 @@
 #include <string>
 #include "ou_est_le_beurre/globals.hpp"
 #include "ou_est_le_beurre/Player.hpp"
+#include "ou_est_le_beurre/Textbox.hpp"
 
 
 class Game {
@@ -23,6 +24,7 @@ public:
 private:
     // player
     Player player;
+    Textbox textbox;
 
 };
 

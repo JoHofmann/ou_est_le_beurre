@@ -7,7 +7,8 @@
 #include <iostream>
 
 Game::Game() :
-	player("Momy.png")
+	player("Momy.png"),
+    textbox("Simple_Textbox.png")
 {
 
 }
@@ -37,7 +38,7 @@ void Game::draw(sf::RenderWindow &window)
 	}
 
     window.draw(player);
-    //window.draw(Momy.png);
+    window.draw(textbox);
 
     window.display();
 }

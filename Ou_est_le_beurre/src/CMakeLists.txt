@@ -3,7 +3,7 @@ message(${ouEstLeBeurre_SOURCE_DIR})
 set(HEADER_LIST "${ouEstLeBeurre_SOURCE_DIR}/include/ou_est_le_beurre/")
 
 # --- add libraries ---
-add_library(ouEstLeBeurreLib Game.cpp Player.cpp ${HEADER_LIST})
+add_library(ouEstLeBeurreLib Game.cpp Player.cpp Textbox.cpp ${HEADER_LIST})
 
 # We need this directory, and users of our library will need it too
 target_include_directories(ouEstLeBeurreLib PUBLIC ../include)
