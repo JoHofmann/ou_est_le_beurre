@@ -14,12 +14,31 @@ public:
     Textbox(const std::string &);
     ~Textbox();
 
+    void draw(sf::RenderWindow &);
+    void update(float);
+
+    // *** Getter and Setter ***
     unsigned int get_width();
     unsigned int get_height();
+    void set_text(std::string);
 
 private:
+    // *** constants ***
+    unsigned int POSITION_OFFSET = 10;
+    int TEXT_POS_OFFSET = 20;
+    int MAX_CHARS_IN_WINDOW = 100;      // if the number of chars of the drawn text is larger than this constant the text will overflow the window
+    float TIME_TILL_NEXT_CHAR = 0.05;    // after this time the next char of the text is drawn
+
+    // *** private fields ***
+    // SFML graphics
     sf::Texture texture;
-    unsigned int position_offset = 10;
+    sf::Font font;
+    sf::Text text_draw;     // the object to draw a text
+
+    // text animation
+    std::string text;       // the text to draw (not the complete text needs to be drawn at once)
+    int text_pointer;       // points to the position of the text that should be drawn
+    float text_animation_timer;
 
 };
 

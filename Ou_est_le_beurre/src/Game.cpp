@@ -10,12 +10,13 @@ Game::Game() :
 	player("Momy.png"),
     textbox("Simple_Textbox.png")
 {
-
+    textbox.set_text(std::string("This is a test text\nWith a newline!\nBlablablabluuu"));
 }
 
 void Game::update(float delta_t)
 {
     player.update(delta_t);
+    textbox.update(delta_t);
 }
 
 void Game::draw(sf::RenderWindow &window)
@@ -38,7 +39,7 @@ void Game::draw(sf::RenderWindow &window)
 	}
 
     window.draw(player);
-    window.draw(textbox);
+    textbox.draw(window);
 
     window.display();
 }
