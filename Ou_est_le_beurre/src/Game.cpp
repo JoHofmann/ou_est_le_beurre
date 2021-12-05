@@ -10,6 +10,7 @@ Game::Game() :
 	player("Momy.png"),
     textbox("Simple_Textbox.png")
 {
+    textbox.set_enabled(true);
     textbox.set_text(std::string("This is a test text\nWith a newline!\nBlablablabluuu"));
 }
 
