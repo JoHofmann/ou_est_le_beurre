@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 #include "ou_est_le_beurre/globals.hpp"
 #include "ou_est_le_beurre/GameObject.hpp"
+#include "ou_est_le_beurre/utils.hpp"
 
 class Textbox : public GameObject
 {
@@ -22,6 +23,10 @@ public:
     void set_text(std::string);
 
 private:
+    // *** private functions ***
+    void crop_text_to_textbox(std::string &new_text);
+
+
     // *** constants ***
     unsigned int POSITION_OFFSET = 10;
     int TEXT_POS_OFFSET = 20;

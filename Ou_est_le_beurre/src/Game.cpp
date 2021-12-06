@@ -11,7 +11,7 @@ Game::Game() :
     textbox("Simple_Textbox.png")
 {
     textbox.set_enabled(true);
-    textbox.set_text(std::string("This is a test text\nWith a newline!\nBlablablabluuu"));
+    textbox.set_text(std::string("This is a simple text to test the texbox newline function for longer sentences. In addition it would be also interesting to test the behaviour when the textbox is running out fo new lines."));
 }
 
 void Game::update(float delta_t)
