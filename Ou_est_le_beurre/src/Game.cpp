@@ -40,7 +40,7 @@ void Game::draw(sf::RenderWindow &window)
 	}
 
     window.draw(player);
-    textbox.draw(window);
+    window.draw(textbox);
 
     window.display();
 }

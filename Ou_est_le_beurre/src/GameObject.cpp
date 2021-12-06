@@ -12,11 +12,11 @@ void GameObject::setPosition(const sf::Vector2f &position) {
     GameObject::position = position;
 }
 
-const sf::FloatRect &GameObject::getShape() const {
+const sf::IntRect &GameObject::getShape() const {
     return shape;
 }
 
-void GameObject::setShape(const sf::FloatRect &shape) {
+void GameObject::setShape(const sf::IntRect &shape) {
     GameObject::shape = shape;
 }
 

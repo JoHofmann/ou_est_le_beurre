@@ -17,13 +17,14 @@ public:
     virtual bool get_enabled();
     virtual const sf::Vector2f &getPosition() const;
     virtual void setPosition(const sf::Vector2f &pos);
-    virtual const sf::FloatRect &getShape() const;
-    virtual void setShape(const sf::FloatRect &shape);
+    virtual const sf::IntRect &getShape() const;
+    virtual void setShape(const sf::IntRect &shape);
 
 protected:
     sf::Vector2f position;
-    sf::FloatRect shape;
+    sf::IntRect shape;
     bool enabled;
+    // TODO implement scale to zoom
 
 
 private:

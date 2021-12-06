@@ -7,22 +7,19 @@
 
 #include <SFML/Graphics.hpp>
 #include "ou_est_le_beurre/globals.hpp"
+#include "ou_est_le_beurre/GameObject.hpp"
 
-class Textbox : public sf::Sprite
+class Textbox : public GameObject
 {
 public:
     Textbox(const std::string &);
-    ~Textbox();
+    ~Textbox() override;
 
-    void draw(sf::RenderWindow &);
-    void update(float);
+    void draw(sf::RenderTarget &, sf::RenderStates) const override;
+    void update(float) override;
 
     // *** Getter and Setter ***
-    unsigned int get_width();
-    unsigned int get_height();
     void set_text(std::string);
-    void set_enabled(bool);
-    bool get_enabled();
 
 private:
     // *** constants ***
@@ -34,11 +31,11 @@ private:
     // *** private fields ***
     // SFML graphics
     sf::Texture texture_box;
+    sf::Sprite sprite_box;
     sf::Texture texture_arrow;
     sf::Sprite sprite_arrow;
     sf::Font font;
     sf::Text text_draw;     // the object to draw a text
-    bool enabled = false;
 
     // text animation
     std::string text;       // the text to draw (not the complete text needs to be drawn at once)

@@ -13,9 +13,12 @@ Textbox::Textbox(const std::string &name) {
         std::cerr << "error while loading Textbox texture" << std::endl;
     }
 
-    this->setTexture(texture_box);
-    this->setTextureRect(sf::IntRect(0, 0, texture_box.getSize().x, texture_box.getSize().y));
-    this->setPosition(POSITION_OFFSET, globals::HEIGHT - get_height() - POSITION_OFFSET);
+    this->setShape(sf::IntRect(0, 0, texture_box.getSize().x, texture_box.getSize().y));
+    this->setPosition(sf::Vector2f(POSITION_OFFSET, globals::HEIGHT - this->getShape().height - POSITION_OFFSET));
+
+    sprite_box.setTexture(texture_box);
+    sprite_box.setTextureRect(this->getShape());
+    sprite_box.setPosition(this->getPosition());
 
     // init arrow down
     if(!texture_arrow.loadFromFile(TEXTURES_PATH + "arrow_down.png")){
@@ -23,7 +26,7 @@ Textbox::Textbox(const std::string &name) {
     }
     sprite_arrow.setTexture(texture_arrow);
     sprite_arrow.setTextureRect(sf::IntRect(0, 0, texture_arrow.getSize().x, texture_arrow.getSize().y));
-    sprite_arrow.setPosition(POSITION_OFFSET + get_width() - 22, globals::HEIGHT - POSITION_OFFSET - 22);
+    sprite_arrow.setPosition(POSITION_OFFSET + this->getShape().width - 22, globals::HEIGHT - POSITION_OFFSET - 22);
 
     // init text
     if (!font.loadFromFile(FONTS_PATH + "arial.ttf"))
@@ -39,12 +42,12 @@ Textbox::Textbox(const std::string &name) {
 Textbox::~Textbox() = default;
 
 
-void Textbox::draw(sf::RenderWindow &window)
+void Textbox::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     if(enabled) {
-        window.draw(*this);
-        window.draw(text_draw);
-        window.draw(sprite_arrow);
+        target.draw(sprite_box, states);
+        target.draw(text_draw, states);
+        target.draw(sprite_arrow, states);
     }
 }
 
@@ -66,20 +69,3 @@ void Textbox::set_text(std::string new_text) {
     text_pointer = 0;
     text_animation_timer = 0.0;
 }
-
-unsigned int Textbox::get_width() {
-    return texture_box.getSize().x * this->getScale().x;
-}
-
-unsigned int Textbox::get_height() {
-    return texture_box.getSize().y * this->getScale().y;
-}
-
-void Textbox::set_enabled(bool new_enabled) {
-    enabled = new_enabled;
-}
-
-bool Textbox::get_enabled() {
-    return enabled;
-}
-
