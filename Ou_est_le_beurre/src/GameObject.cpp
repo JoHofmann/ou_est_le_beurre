@@ -21,7 +21,7 @@ void GameObject::setShape(const sf::IntRect &shape) {
 }
 
 void GameObject::set_enabled(bool enabled) {
-    GameObject::enabled - enabled;
+    GameObject::enabled = enabled;
 }
 
 bool GameObject::get_enabled() {

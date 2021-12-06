@@ -56,7 +56,7 @@ void Textbox::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
 void Textbox::update(float delta_t)
 {
-    if(enabled) {
+    if(this->get_enabled()) {
         text_animation_timer += delta_t;
         if (text_animation_timer >= TIME_TILL_NEXT_CHAR) {
             text_animation_timer = 0;
@@ -70,24 +70,35 @@ void Textbox::update(float delta_t)
                         stop_typing_text = true;
                         arrow_motion_counter = 0;
                         arrow_motion_direction = {0, -1};
-                        // TODO blink until key pressed, then do the following
-                        //drawn_line_counter = 0;
-                        //text_pointer_start = text_pointer_length;
-                        //text_pointer_length = 0;
                     }
                 }
                 if (text_pointer_start + text_pointer_length < text.size() - 1 && !stop_typing_text) {
                     text_pointer_length++;
                     // TODO else show arrow and close after key pressed
+                } else {
+                    stop_typing_text = true;
                 }
             } else {
-                // show blinking arrow
-                arrow_motion_counter++;
-                if(arrow_motion_counter > 3){
-                    arrow_motion_direction = {arrow_motion_direction.x * -1, arrow_motion_direction.y * -1};
-                    arrow_motion_counter = 0;
+                if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
+                    // blink until key pressed, then do the following
+                    // close textbox if text is done
+                    if(text_pointer_start + text_pointer_length >= text.size() -1){
+                        this->set_enabled(false);
+                        // TODO set something so that the main game can continue
+                    }
+                    drawn_line_counter = 0;
+                    text_pointer_start = text_pointer_length + 1;       // +1 to skip one newline
+                    text_pointer_length = 0;
+                    stop_typing_text = false;
+                } else {
+                    // show blinking arrow
+                    arrow_motion_counter++;
+                    if (arrow_motion_counter > 3) {
+                        arrow_motion_direction = {arrow_motion_direction.x * -1, arrow_motion_direction.y * -1};
+                        arrow_motion_counter = 0;
+                    }
+                    sprite_arrow.move(arrow_motion_direction);
                 }
-                sprite_arrow.move(arrow_motion_direction);
             }
         }
     }
