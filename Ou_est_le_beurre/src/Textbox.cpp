@@ -48,17 +48,11 @@ void Textbox::draw(sf::RenderTarget &target, sf::RenderStates states) const
     if(enabled) {
         target.draw(sprite_box, states);
         target.draw(text_draw, states);
-        target.draw(sprite_arrow, states);
+        if(stop_typing_text) {
+            target.draw(sprite_arrow, states);
+        }
     }
 }
-
-//int get_length_to_next_word(std::string text, int offset)
-//{
-//    std::regex word_separator(std::string(" "));
-//    std::smatch m;
-//    std::regex_search(text, m, word_separator);
-//    return (int)m.position() + 1;
-//}
 
 void Textbox::update(float delta_t)
 {
@@ -66,18 +60,34 @@ void Textbox::update(float delta_t)
         text_animation_timer += delta_t;
         if (text_animation_timer >= TIME_TILL_NEXT_CHAR) {
             text_animation_timer = 0;
-            // TODO consider the MAX_CHAR limit
+            text_draw.setString(text.substr(text_pointer_start, text_pointer_length + 1));
 
-            //int length_to_next_word = get_length_to_next_word(text.substr(text_pointer+1, text.size()-1), 0);
-            // TODO instead of length to next word I need the px size of this new word ...
-            //if(text_draw.getLocalBounds().width + length_to_next_word >= this->getShape().width - TEXT_POS_OFFSET*2){
-            //    text.at(text_pointer) = '\n';
-            //    //std::cout << text_draw.getLocalBounds().width << " | " << this->getShape().width << std::endl;
-            //}
-            //std::cout << text_draw.getLocalBounds().width << std::endl;
-            text_draw.setString(text.substr(0, text_pointer));
-            if(text_pointer < text.size()){
-                text_pointer++;
+            // update text animation
+            if(!stop_typing_text) {
+                // consider max line limit
+                if (text.at(text_pointer_start + text_pointer_length) == '\n') {
+                    if (++drawn_line_counter >= MAX_TEXT_LINES) {
+                        stop_typing_text = true;
+                        arrow_motion_counter = 0;
+                        arrow_motion_direction = {0, -1};
+                        // TODO blink until key pressed, then do the following
+                        //drawn_line_counter = 0;
+                        //text_pointer_start = text_pointer_length;
+                        //text_pointer_length = 0;
+                    }
+                }
+                if (text_pointer_start + text_pointer_length < text.size() - 1 && !stop_typing_text) {
+                    text_pointer_length++;
+                    // TODO else show arrow and close after key pressed
+                }
+            } else {
+                // show blinking arrow
+                arrow_motion_counter++;
+                if(arrow_motion_counter > 3){
+                    arrow_motion_direction = {arrow_motion_direction.x * -1, arrow_motion_direction.y * -1};
+                    arrow_motion_counter = 0;
+                }
+                sprite_arrow.move(arrow_motion_direction);
             }
         }
     }
@@ -112,8 +122,11 @@ void Textbox::crop_text_to_textbox(std::string &new_text){
 void Textbox::set_text(std::string new_text) {
     crop_text_to_textbox(new_text);
     text = new_text;
-    text_pointer = 0;
     text_animation_timer = 0.0;
-
-
+    drawn_line_counter = 0;
+    text_pointer_length = 0;
+    text_pointer_start = 0;
+    stop_typing_text = false;
+    arrow_motion_counter = 0;
+    arrow_motion_direction = {0, -1};
 }

@@ -30,7 +30,7 @@ private:
     // *** constants ***
     unsigned int POSITION_OFFSET = 10;
     int TEXT_POS_OFFSET = 20;
-    int MAX_CHARS_IN_WINDOW = 100;      // if the number of chars of the drawn text is larger than this constant the text will overflow the window
+    int MAX_TEXT_LINES = 3;
     float TIME_TILL_NEXT_CHAR = 0.05;    // after this time the next char of the text is drawn
 
     // *** private fields ***
@@ -44,8 +44,14 @@ private:
 
     // text animation
     std::string text;       // the text to draw (not the complete text needs to be drawn at once)
-    int text_pointer;       // points to the position of the text that should be drawn
+    int text_pointer_length;       // points to the position of the text that should be drawn
+    int text_pointer_start;
     float text_animation_timer;
+    int drawn_line_counter;
+    bool stop_typing_text;
+    int arrow_motion_counter;
+    bool arrow_up;
+    sf::Vector2f arrow_motion_direction;
 
 };
 
