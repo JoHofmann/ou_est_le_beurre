@@ -4,12 +4,12 @@
 
 #include "ou_est_le_beurre/GameObject.hpp"
 
-const sf::Vector2f &GameObject::getPos() const {
-    return pos;
+const sf::Vector2f &GameObject::getPosition() const {
+    return position;
 }
 
-void GameObject::setPos(const sf::Vector2f &pos) {
-    GameObject::pos = pos;
+void GameObject::setPosition(const sf::Vector2f &position) {
+    GameObject::position = position;
 }
 
 const sf::FloatRect &GameObject::getShape() const {

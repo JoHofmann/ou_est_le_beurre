@@ -10,18 +10,18 @@
 
 class GameObject : public sf::Drawable{
 public:
-    virtual void update(float);
+    virtual void update(float) = 0;
 
     // *** Getter and Setter ***
     virtual void set_enabled(bool);
     virtual bool get_enabled();
-    virtual const sf::Vector2f &getPos() const;
-    virtual void setPos(const sf::Vector2f &pos);
+    virtual const sf::Vector2f &getPosition() const;
+    virtual void setPosition(const sf::Vector2f &pos);
     virtual const sf::FloatRect &getShape() const;
     virtual void setShape(const sf::FloatRect &shape);
 
 protected:
-    sf::Vector2f pos;
+    sf::Vector2f position;
     sf::FloatRect shape;
     bool enabled;
 
