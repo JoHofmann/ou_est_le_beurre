@@ -15,6 +15,7 @@ Game::Game() :
     textbox.set_text(std::string("This is a simple text to test the texbox newline function for longer sentences. In addition it would be also interesting to test the behaviour when the textbox is running out of new lines."));
 
     // TODO add all states to states vector
+    // TODO I really don't know how I can put a child of State into a vector of states
     TestState *testState = new TestState(this);
     Game::states.push_back(testState);
     // TODO start iterator
@@ -68,6 +69,7 @@ void Game::draw(sf::RenderWindow &window)
 }
 
 Game::~Game() {
+    // TODO not working destructor
     for(State *state : states){
         delete (*state);
     }
