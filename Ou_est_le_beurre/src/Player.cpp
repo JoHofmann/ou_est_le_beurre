@@ -19,11 +19,17 @@ Player::Player(const std::string &tex_path) :
     }
 
     // set players texture as first sprite
-	this->setTexture(texture);
-	this->setTextureRect(sf::IntRect(0, 0, globals::TILESIZE, globals::TILESIZE));
+	sprite.setTexture(texture);
+	sprite.setTextureRect(sf::IntRect(0, 0, globals::TILESIZE, globals::TILESIZE));
+
+//	shape = sprite.getGlobalBounds();
 
 	// init player position in middle
-	this->setPosition(globals::WIDTH/2.f, globals::HEIGHT/2.f);
+	position = sf::Vector2f(globals::WIDTH/2.f, globals::HEIGHT/2.f);
+	sprite.setPosition(position);
+
+	// set enabled true in default
+	enabled = true;
 }
 
 Player::~Player() {
@@ -32,11 +38,23 @@ Player::~Player() {
 
 void Player::update(float delta_t) {
 
-	// update gridPosition
-	gridPostion = sf::Vector2i(this->getPosition().x / globals::TILESIZE, this->getPosition().y / globals::TILESIZE);
+	if(enabled) {
+		// update positions
+		gridPostion = sf::Vector2i(position.x / globals::TILESIZE, position.y / globals::TILESIZE);
 
-	moveTile(delta_t);
+		moveTile(delta_t);
+
+		sprite.setPosition(position);
+	}
 }
+
+void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const
+{
+	if(enabled) {
+		target.draw(sprite, states);
+	}
+}
+
 
 void Player::moveTile(float delta_t) {
 
@@ -100,16 +118,16 @@ void Player::moveTile(float delta_t) {
 
 		switch(moveDirection) {
 		case UP:
-			this->setPosition(startPos.x, startPos.y - (globals::TILESIZE * progress));
+			position = sf::Vector2f(startPos.x, startPos.y - (globals::TILESIZE * progress));
 			break;
 		case LEFT:
-			this->setPosition(startPos.x - (globals::TILESIZE * progress), startPos.y);
+			position = sf::Vector2f(startPos.x - (globals::TILESIZE * progress), startPos.y);
 			break;
 		case DOWN:
-			this->setPosition(startPos.x, startPos.y + (globals::TILESIZE * progress));
+			position = sf::Vector2f(startPos.x, startPos.y + (globals::TILESIZE * progress));
 			break;
 		case RIGHT:
-			this->setPosition(startPos.x + (globals::TILESIZE * progress), startPos.y);
+			position = sf::Vector2f(startPos.x + (globals::TILESIZE * progress), startPos.y);
 			break;
 
 		default:
