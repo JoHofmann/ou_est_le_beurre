@@ -27,9 +27,6 @@ Player::Player(const std::string &tex_path) :
 	// init player position in middle
 	position = sf::Vector2f(globals::WIDTH/2.f, globals::HEIGHT/2.f);
 	sprite.setPosition(position);
-
-	// set enabled true in default
-	enabled = true;
 }
 
 Player::~Player() {
