@@ -39,6 +39,7 @@ private:
 
 	// moveTile
 	const float timePerTile;	// in seconds
+	const float offsetTime;		// time to wait between rotating and moving
 };
 
-#endif /* INCLUDE_OU_EST_LE_BEURRE_PLAYER_HPP_ */
+#endif
