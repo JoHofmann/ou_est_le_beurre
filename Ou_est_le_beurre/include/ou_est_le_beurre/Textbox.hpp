@@ -28,10 +28,10 @@ private:
 
 
     // *** constants ***
-    unsigned int POSITION_OFFSET = 10;
-    int TEXT_POS_OFFSET = 20;
-    int MAX_TEXT_LINES = 3;
-    float TIME_TILL_NEXT_CHAR = 0.05;    // after this time the next char of the text is drawn
+    const unsigned int POSITION_OFFSET = 10;
+    const int TEXT_POS_OFFSET = 20;
+    const int MAX_TEXT_LINES = 3;
+    const float TIME_TILL_NEXT_CHAR = 0.05;    // after this time the next char of the text is drawn
 
     // *** private fields ***
     // SFML graphics
