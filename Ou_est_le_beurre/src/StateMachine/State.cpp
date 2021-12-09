@@ -10,7 +10,7 @@ State::State(Game const *game) : game(game) {
 
 void State::update(float delta_t) {
     State::elapsedTime += delta_t;
-    State::processState();
+    this->processState();
 }
 
 // *** Getter and Setter ***

@@ -7,31 +7,38 @@
 
 #include <iostream>
 
-Game::Game() :
-	player("Momy.png"),
-    textbox("Simple_Textbox.png")
+Game::Game()
 {
-    textbox.set_enabled(true);
-    textbox.set_text(std::string("This is a simple text to test the texbox newline function for longer sentences. In addition it would be also interesting to test the behaviour when the textbox is running out of new lines."));
+    pPlayer = std::make_shared<Player>("Momy.png");
+    pTextbox = std::make_shared<Textbox>("Simple_Textbox.png");
+
+    pPlayer->set_enabled(true);
+
+    pTextbox->set_enabled(true);
+    pTextbox->set_text(std::string("This is a simple text to test the texbox newline function for longer sentences. In addition it would be also interesting to test the behaviour when the textbox is running out of new lines."));
+
+    gameObjects.push_back(pPlayer);
+    gameObjects.push_back(pTextbox);
+
 
     // TODO add all states to states vector
     // TODO I really don't know how I can put a child of State into a vector of states
-    TestState *testState = new TestState(this);
-    Game::states.push_back(testState);
+    std::shared_ptr<TestState> pTestState = std::make_shared<TestState>(this);
+    states.push_back(pTestState);
     // TODO start iterator
     stateIterator = states.begin();
 }
 
 void Game::updateStateMachine(float delta_t){
-    if((*stateIterator)->goalReached()){
-        if((*stateIterator) == (*states.end())){
+    if(stateIterator->get()->goalReached()){
+        if(stateIterator->get() == states.back().get()){
             // TODO do something
             std::cout << "Game is over" << std::endl;
         }else{
             stateIterator = next(stateIterator);
         }
     }
-    (*stateIterator)->update(delta_t);
+    stateIterator->get()->update(delta_t);
 }
 
 void Game::update(float delta_t)
@@ -39,8 +46,10 @@ void Game::update(float delta_t)
     updateStateMachine(delta_t);
 
     // TODO update all game objects general
-    player.update(delta_t);
-    textbox.update(delta_t);
+    // update gameObjects
+    for (auto it = gameObjects.begin(); it != gameObjects.end(); ++it) {
+    	(*it)->update(delta_t);
+	}
 }
 
 void Game::draw(sf::RenderWindow &window)
@@ -62,20 +71,18 @@ void Game::draw(sf::RenderWindow &window)
     	}
 	}
 
-    window.draw(player);
-    window.draw(textbox);
+    // draw gameObjects
+    for (auto it = gameObjects.begin(); it != gameObjects.end(); ++it) {
+    	window.draw(*(*it));
+	}
 
     window.display();
 }
 
 Game::~Game() {
-    // TODO not working destructor
-    for(State *state : states){
-        delete (*state);
-    }
 }
 
-const Textbox &Game::getTextbox() const {
-    return textbox;
+const std::shared_ptr<Textbox> &Game::getPTextbox() const {
+    return pTextbox;
 }
 

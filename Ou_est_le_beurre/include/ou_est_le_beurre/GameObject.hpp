@@ -8,7 +8,7 @@
 #include <SFML/Graphics.hpp>
 #include "ou_est_le_beurre/globals.hpp"
 
-class GameObject : public sf::Drawable{
+class GameObject : public sf::Drawable {
 public:
     virtual void update(float) = 0;
 
