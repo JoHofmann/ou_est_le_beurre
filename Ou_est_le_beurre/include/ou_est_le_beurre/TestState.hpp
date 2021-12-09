@@ -16,6 +16,7 @@ public:
 private:
     void processState() override;
 
+    std::shared_ptr<Textbox> pTextbox;
 };
 
 

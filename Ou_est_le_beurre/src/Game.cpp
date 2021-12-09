@@ -14,9 +14,6 @@ Game::Game()
 
     pPlayer->set_enabled(true);
 
-    pTextbox->set_enabled(true);
-    pTextbox->set_text(std::string("This is a simple text to test the texbox newline function for longer sentences. In addition it would be also interesting to test the behaviour when the textbox is running out of new lines."));
-
     gameObjects.push_back(pPlayer);
     gameObjects.push_back(pTextbox);
 

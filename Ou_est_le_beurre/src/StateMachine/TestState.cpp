@@ -6,18 +6,23 @@
 #include <iostream>
 
 TestState::TestState(Game const*game) : State(game) {
+    pTextbox = game->getPTextbox();
+    pTextbox->set_enabled(true);
+    pTextbox->set_text(std::string("This is a simple text to test the texbox newline function for longer sentences. In addition it would be also interesting to test the behaviour when the textbox is running out of new lines."));
 
 }
 
 bool TestState::goalReached() {
-    if(getElapsedTime() > 2.0){
+    // this test state is over when the text of the textbox is fully shown
+    if(!pTextbox->get_enabled()){
         return true;
     }
     return false;
 }
 
 void TestState::processState() {
-    //Textbox textbox = game->getTextbox();
-    std::cout << "processing test state" << std::endl;
+    if(!goalReached()){
+        std::cout << "processing test state" << std::endl;
+    }
 }
 
