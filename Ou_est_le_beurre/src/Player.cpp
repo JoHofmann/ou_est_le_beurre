@@ -54,7 +54,7 @@ void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const
 
 void Player::moveTile(float delta_t) {
 
-	static bool moving = false;
+	static bool moving = false, walking = false;
 	static Direction prevDirection;
 	static sf::Vector2f startPos;
 	static float time = 0.f;
@@ -70,7 +70,9 @@ void Player::moveTile(float delta_t) {
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { 			// move up
 			direction = UP;
 
-			if(prevDirection != direction) {
+			sprite.setTextureRect(sf::IntRect(0, 0, globals::TILESIZE, globals::TILESIZE));
+
+			if(prevDirection != direction && !walking) {
 				time = 0.f;
 			}else if(time >= offsetTime) {
 				time = 0.f;
@@ -79,15 +81,14 @@ void Player::moveTile(float delta_t) {
 						!globals::collision_map[gridPostion.y - 1][gridPostion.x]) {	// check if next field is accessable
 					moving = true;
 				}
-			}else{
-				// rotate here (change texture)
-				sprite.setTextureRect(sf::IntRect(0, 0, globals::TILESIZE, globals::TILESIZE));
 			}
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {		// move left
 			direction = LEFT;
 
-			if(prevDirection != direction) {
+			sprite.setTextureRect(sf::IntRect(3*globals::TILESIZE, 0, globals::TILESIZE, globals::TILESIZE));
+
+			if(prevDirection != direction && !walking) {
 				time = 0.f;
 			}else if(time >= offsetTime) {
 				time = 0.f;
@@ -96,15 +97,14 @@ void Player::moveTile(float delta_t) {
 						!globals::collision_map[gridPostion.y][gridPostion.x - 1]) {	// check if next field is accessable
 					moving = true;
 				}
-			}else{
-				// rotate here (change texture)
-				sprite.setTextureRect(sf::IntRect(3*globals::TILESIZE, 0, globals::TILESIZE, globals::TILESIZE));
 			}
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {		// move down
 			direction = DOWN;
 
-			if(prevDirection != direction) {
+			sprite.setTextureRect(sf::IntRect(2*globals::TILESIZE, 0, globals::TILESIZE, globals::TILESIZE));
+
+			if(prevDirection != direction && !walking) {
 				time = 0.f;
 			}else if(time >= offsetTime) {
 				time = 0.f;
@@ -113,15 +113,14 @@ void Player::moveTile(float delta_t) {
 						!globals::collision_map[gridPostion.y + 1][gridPostion.x]) {	// check if next field is accessable
 					moving = true;
 				}
-			}else{
-				// rotate here (change texture)
-				sprite.setTextureRect(sf::IntRect(2*globals::TILESIZE, 0, globals::TILESIZE, globals::TILESIZE));
 			}
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {		// move right
 			direction = RIGHT;
 
-			if(prevDirection != direction) {
+			sprite.setTextureRect(sf::IntRect(globals::TILESIZE, 0, globals::TILESIZE, globals::TILESIZE));
+
+			if(prevDirection != direction && !walking) {
 				time = 0.f;
 			}else if(time >= offsetTime) {
 				time = 0.f;
@@ -130,15 +129,15 @@ void Player::moveTile(float delta_t) {
 						!globals::collision_map[gridPostion.y][gridPostion.x + 1]) {	// check if next field is accessable
 					moving = true;
 				}
-			}else{
-				// rotate here (change texture)
-				sprite.setTextureRect(sf::IntRect(globals::TILESIZE, 0, globals::TILESIZE, globals::TILESIZE));
 			}
 		}
 
 		prevDirection = direction;
+		walking = false;
 
 	}else{	// executing move
+
+		walking = true;
 
 		float progress = time / timePerTile;	// progress [0 - 1]
 
