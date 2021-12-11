@@ -36,7 +36,7 @@ void Player::update(float delta_t) {
 
 	if(enabled) {
 		// update positions
-		gridPostion = sf::Vector2i(position.x / globals::TILESIZE, position.y / globals::TILESIZE);
+		gridPostion = sf::Vector2i(position) / globals::TILESIZE;
 
 		moveTile(delta_t);
 
@@ -77,7 +77,7 @@ void Player::moveTile(float delta_t) {
 			}else if(time >= offsetTime) {
 				time = 0.f;
 
-				if(inMap(gridPostion.y - 1, gridPostion.x) &&
+				if(inMap(gridPostion.x, gridPostion.y - 1) &&
 						!globals::collision_map[gridPostion.y - 1][gridPostion.x]) {	// check if next field is accessable
 					moving = true;
 				}
@@ -93,7 +93,7 @@ void Player::moveTile(float delta_t) {
 			}else if(time >= offsetTime) {
 				time = 0.f;
 
-				if(inMap(gridPostion.y, gridPostion.x - 1) &&
+				if(inMap(gridPostion.x - 1, gridPostion.y) &&
 						!globals::collision_map[gridPostion.y][gridPostion.x - 1]) {	// check if next field is accessable
 					moving = true;
 				}
@@ -109,7 +109,7 @@ void Player::moveTile(float delta_t) {
 			}else if(time >= offsetTime) {
 				time = 0.f;
 
-				if(inMap(gridPostion.y + 1, gridPostion.x) &&
+				if(inMap(gridPostion.x, gridPostion.y + 1) &&
 						!globals::collision_map[gridPostion.y + 1][gridPostion.x]) {	// check if next field is accessable
 					moving = true;
 				}
@@ -125,7 +125,7 @@ void Player::moveTile(float delta_t) {
 			}else if(time >= offsetTime) {
 				time = 0.f;
 
-				if(inMap(gridPostion.y, gridPostion.x + 1) &&
+				if(inMap(gridPostion.x + 1, gridPostion.y) &&
 						!globals::collision_map[gridPostion.y][gridPostion.x + 1]) {	// check if next field is accessable
 					moving = true;
 				}
@@ -169,6 +169,7 @@ void Player::moveTile(float delta_t) {
 
 // check if pos(x, y) is in map
 bool Player::inMap(int x, int y) {
+
 	return x >= 0 && y >= 0 && x < globals::XTILECOUNT && y < globals::YTILECOUNT;
 }
 
