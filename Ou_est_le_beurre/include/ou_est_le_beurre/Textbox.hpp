@@ -20,7 +20,7 @@ public:
     void update(float) override;
 
     // *** Getter and Setter ***
-    void set_text(std::string);
+    void set_text(std::string, std::string);
 
 private:
     // *** private functions ***
@@ -29,9 +29,10 @@ private:
 
     // *** constants ***
     const unsigned int POSITION_OFFSET = 10;
-    const int TEXT_POS_OFFSET = 20;
+    const sf::Vector2f TEXT_POS_OFFSET = {20, 20};
     const int MAX_TEXT_LINES = 3;
     const float TIME_TILL_NEXT_CHAR = 0.05;    // after this time the next char of the text is drawn
+    const sf::Vector2f NAME_TEXT_POS_OFFSET = {15, 5};
 
     // *** private fields ***
     // SFML graphics
@@ -41,6 +42,7 @@ private:
     sf::Sprite sprite_arrow;
     sf::Font font;
     sf::Text text_draw;     // the object to draw a text
+    sf::Text name_text_draw;
 
     // text animation
     std::string text;       // the text to draw (not the complete text needs to be drawn at once)

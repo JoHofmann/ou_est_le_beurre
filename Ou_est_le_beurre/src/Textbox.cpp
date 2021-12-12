@@ -37,7 +37,13 @@ Textbox::Textbox(const std::string &name) {
     text_draw.setFont(font);
     text_draw.setCharacterSize(14);
     text_draw.setFillColor(sf::Color::Black);
-    text_draw.setPosition(this->getPosition().x + TEXT_POS_OFFSET, this->getPosition().y + TEXT_POS_OFFSET);
+    text_draw.setPosition(this->getPosition().x + TEXT_POS_OFFSET.x, this->getPosition().y + TEXT_POS_OFFSET.y);
+
+    // init name text
+    name_text_draw.setFont(font);
+    name_text_draw.setCharacterSize(14);
+    name_text_draw.setFillColor(sf::Color::Black);
+    name_text_draw.setPosition(this->getPosition().x + NAME_TEXT_POS_OFFSET.x, this->getPosition().y + NAME_TEXT_POS_OFFSET.y);
 }
 
 Textbox::~Textbox() = default;
@@ -48,6 +54,7 @@ void Textbox::draw(sf::RenderTarget &target, sf::RenderStates states) const
     if(enabled) {
         target.draw(sprite_box, states);
         target.draw(text_draw, states);
+        target.draw(name_text_draw, states);
         if(stop_typing_text) {
             target.draw(sprite_arrow, states);
         }
@@ -115,7 +122,7 @@ void Textbox::crop_text_to_textbox(std::string &new_text){
         tmp_text << " " << t << std::flush;
         text_draw.setString(tmp_text.str());
         // true if text is bouncing out of the box
-        if(text_draw.getLocalBounds().width < getShape().width - TEXT_POS_OFFSET*2){
+        if(text_draw.getLocalBounds().width < getShape().width - TEXT_POS_OFFSET.y*2){
             processed_text.str(std::string(""));
             processed_text << tmp_text.str();
         } else {
@@ -130,7 +137,7 @@ void Textbox::crop_text_to_textbox(std::string &new_text){
 }
 
 // *** getter and setter ***
-void Textbox::set_text(std::string new_text) {
+void Textbox::set_text(std::string name, std::string new_text) {
     crop_text_to_textbox(new_text);
     text = new_text;
     text_animation_timer = 0.0;
@@ -140,4 +147,6 @@ void Textbox::set_text(std::string new_text) {
     stop_typing_text = false;
     arrow_motion_counter = 0;
     arrow_motion_direction = {0, -1};
+
+    name_text_draw.setString(name);
 }
