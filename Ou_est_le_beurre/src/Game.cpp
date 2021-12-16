@@ -27,15 +27,15 @@ Game::Game()
 }
 
 void Game::updateStateMachine(float delta_t){
-    if(stateIterator->get()->goalReached()){
-        if(stateIterator->get() == states.back().get()){
+    if((*stateIterator)->goalReached()){
+        if((*stateIterator) == states.back()){
             // TODO do something
             std::cout << "Game is over" << std::endl;
         }else{
             stateIterator = next(stateIterator);
         }
     }
-    stateIterator->get()->update(delta_t);
+    (*stateIterator)->update(delta_t);
 }
 
 void Game::update(float delta_t)
