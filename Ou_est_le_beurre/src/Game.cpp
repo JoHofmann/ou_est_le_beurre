@@ -9,6 +9,17 @@
 
 Game::Game()
 {
+    // Background Music
+    // load something into the sound buffer...
+    if (!soundBuffer.loadFromFile(AUDIO_PATH + "Background_Music_Test.WAV"))
+        std::cerr << "Problems while loading background music" << std::endl;
+
+    backgroundMusic.setBuffer(soundBuffer);
+    backgroundMusic.setLoop(true);
+
+    backgroundMusic.play();
+
+
     pPlayer = std::make_shared<Player>("Momy.png");
     pTextbox = std::make_shared<Textbox>("Simple_Textbox.png");
 

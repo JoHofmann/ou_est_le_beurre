@@ -6,6 +6,7 @@
 #define OUESTLEBEURRE_GAME_HPP
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <string>
 #include <vector>
 #include <memory>
@@ -41,6 +42,10 @@ private:
 
     // GameObject Vector
     std::vector<std::shared_ptr<GameObject>> gameObjects;
+
+    // Sound and Music
+    sf::SoundBuffer soundBuffer;
+    sf::Sound backgroundMusic;
 };
 
 

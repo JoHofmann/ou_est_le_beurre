@@ -9,6 +9,7 @@
 
 #define TEXTURES_PATH std::string("../resources/textures/")
 #define FONTS_PATH std::string("../resources/fonts/")
+#define AUDIO_PATH std::string("../resources/audios/")
 
 namespace globals{
 	const int TILESIZE = 32;
