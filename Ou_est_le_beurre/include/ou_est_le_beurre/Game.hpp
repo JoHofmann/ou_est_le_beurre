@@ -15,6 +15,7 @@
 #include "ou_est_le_beurre/Textbox.hpp"
 #include "ou_est_le_beurre/State.hpp"
 #include "ou_est_le_beurre/GameObject.hpp"
+#include "ou_est_le_beurre/FadeObject.hpp"
 
 
 class Game {
@@ -28,6 +29,7 @@ public:
 
     // *** Getter and Setter ***
     const std::shared_ptr<Textbox> &getPTextbox() const;
+    const std::shared_ptr<FadeObject> &getPFade() const;
 
 private:
 
@@ -39,6 +41,7 @@ private:
     // pointer on GameObjects
     std::shared_ptr<Player> pPlayer;
     std::shared_ptr<Textbox> pTextbox;
+    std::shared_ptr<FadeObject> pFade;
 
     // GameObject Vector
     std::vector<std::shared_ptr<GameObject>> gameObjects;

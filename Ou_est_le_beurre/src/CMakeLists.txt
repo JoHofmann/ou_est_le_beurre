@@ -8,6 +8,7 @@ add_library(ouEstLeBeurreLib
         GameObjects/Player.cpp
         GameObjects/Textbox.cpp
         GameObjects/GameObject.cpp
+        GameObjects/FadeObject.cpp
         utils.cpp
         StateMachine/State.cpp
         StateMachine/TestState.cpp

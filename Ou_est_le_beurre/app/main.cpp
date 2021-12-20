@@ -11,7 +11,7 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(globals::WIDTH, globals::HEIGHT), "Ou est le beurre?");
-    window.setFramerateLimit(30);
+    window.setFramerateLimit(globals::FPS);
     Game game;
 
     // delta_t + clock

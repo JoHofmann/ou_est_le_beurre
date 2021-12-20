@@ -22,11 +22,13 @@ Game::Game()
 
     pPlayer = std::make_shared<Player>("Momy.png");
     pTextbox = std::make_shared<Textbox>("Simple_Textbox.png");
+    pFade = std::make_shared<FadeObject>();
 
     pPlayer->set_enabled(true);
 
     gameObjects.push_back(pPlayer);
     gameObjects.push_back(pTextbox);
+    gameObjects.push_back(pFade);
 
 
     // TODO add all states to states vector
@@ -92,5 +94,9 @@ Game::~Game() {
 
 const std::shared_ptr<Textbox> &Game::getPTextbox() const {
     return pTextbox;
+}
+
+const std::shared_ptr<FadeObject> &Game::getPFade() const {
+    return pFade;
 }
 

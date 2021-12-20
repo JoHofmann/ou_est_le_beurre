@@ -12,6 +12,8 @@
 #define AUDIO_PATH std::string("../resources/audios/")
 
 namespace globals{
+    const int FPS = 30;
+
 	const int TILESIZE = 32;
 
 	const int XTILECOUNT = 20;

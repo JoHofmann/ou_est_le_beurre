@@ -21,37 +21,3 @@ void OpeningState::processState() {
     // TODO show intro text
 
 }
-sf::RectangleShape transitionRectangle{ sf::Vector2f(100, 100) };
-sf::Uint8 transitionRectangleAlphaChannel = 0;
-
-enum class superiorBool { Uninitialized, True, False };
-superiorBool someBool = superiorBool::True;
-
-sf::Clock transitionClock;
-
-void transition()
-{
-    transitionRectangle.setFillColor(sf::Color(0, 0, 0, transitionRectangleAlphaChannel));
-
-    if (transitionClock.getElapsedTime().asSeconds() > 0.1f && transitionRectangleAlphaChannel < 255.f && someBool == superiorBool::True)
-    {
-        transitionRectangleAlphaChannel += 5;
-        transitionClock.restart();
-
-        if (transitionRectangleAlphaChannel == 255)
-        {
-            someBool = superiorBool::False;
-        }
-
-    }
-    else if (transitionClock.getElapsedTime().asSeconds() > 0.1f && transitionRectangleAlphaChannel > 0.f && someBool == superiorBool::False)
-    {
-        transitionRectangleAlphaChannel -= 5;
-        transitionClock.restart();
-
-        if (transitionRectangleAlphaChannel == 0)
-        {
-            someBool = superiorBool::Uninitialized;
-        }
-    }
-}
