@@ -23,7 +23,11 @@ bool OpeningState::goalReached() {
 }
 
 void OpeningState::prepareEpilog(){
-    pTextbox->set_text(L"Spielemacher", L"Das hier ist der Beginn von einem großartigem Spiel!");
+    pTextbox->set_text(L"Muttern",
+                       L"Gääähn. Oh, was ist das nur für ein schöner Morgen. Ich glaube das ganze Haus schläft noch…\n"
+                       "Ah es ist ja schon 10Uhr. Vielleicht sind die Kinder (lange über 18) ja auch schon wach. "
+                       "Naja egal. Ich glaube ich nutze den Tag heute um einen Kuchen zu backen. "
+                       "Mal schauen, ob ich im Kühlschrank alles dafür finden kann...");
     pTextbox->set_enabled(true);
 }
 

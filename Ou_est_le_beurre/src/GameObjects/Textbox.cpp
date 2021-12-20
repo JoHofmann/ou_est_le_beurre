@@ -27,16 +27,16 @@ Textbox::Textbox(const std::string &name) {
     }
     sprite_arrow.setTexture(texture_arrow);
     sprite_arrow.setTextureRect(sf::IntRect(0, 0, texture_arrow.getSize().x, texture_arrow.getSize().y));
-    sprite_arrow.setPosition(POSITION_OFFSET + this->getShape().width - 22, globals::HEIGHT - POSITION_OFFSET - 22);
+    sprite_arrow.setPosition(POSITION_OFFSET + this->getShape().width - ARROW_POS_OFFSET.x, globals::HEIGHT - POSITION_OFFSET - ARROW_POS_OFFSET.y);
 
     // init text
-    if (!font.loadFromFile(FONTS_PATH + "arial.ttf"))
+    if (!font.loadFromFile(FONTS_PATH + "OcrB2.ttf"))
     {
         std::cerr << "Error while loading arial.ttf font" << std::endl;
     }
     text_draw.setFont(font);
     text_draw.setCharacterSize(14);
-    text_draw.setFillColor(sf::Color::Black);
+    text_draw.setFillColor(sf::Color::White);
     text_draw.setPosition(this->getPosition().x + TEXT_POS_OFFSET.x, this->getPosition().y + TEXT_POS_OFFSET.y);
 
     // init name text
@@ -94,7 +94,7 @@ void Textbox::update(float delta_t)
                         // TODO set something so that the main game can continue
                     }
                     drawn_line_counter = 0;
-                    text_pointer_start = text_pointer_length + 1;       // +1 to skip one newline
+                    text_pointer_start += text_pointer_length + 1;       // +1 to skip one newline
                     text_pointer_length = 0;
                     stop_typing_text = false;
                 } else {
@@ -122,7 +122,7 @@ void Textbox::crop_text_to_textbox(std::wstring &new_text){
         tmp_text << " " << t << std::flush;
         text_draw.setString(tmp_text.str());
         // true if text is bouncing out of the box
-        if(text_draw.getLocalBounds().width < getShape().width - TEXT_POS_OFFSET.y*2){
+        if(text_draw.getLocalBounds().width < this->getShape().width - TEXT_POS_OFFSET.y*2){
             processed_text.str(std::wstring(L""));
             processed_text << tmp_text.str();
         } else {

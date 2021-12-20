@@ -40,6 +40,8 @@ Game::Game()
     // TODO I really don't know how I can put a child of State into a vector of states
     std::shared_ptr<OpeningState> pOpeningState = std::make_shared<OpeningState>(this);
     states.push_back(pOpeningState);
+    //std::shared_ptr<TestState> pTestState = std::make_shared<TestState>(this);
+    //states.push_back(pTestState);
     // TODO start iterator
     stateIterator = states.begin();
 }

@@ -29,10 +29,11 @@ private:
 
     // *** constants ***
     const unsigned int POSITION_OFFSET = 10;
-    const sf::Vector2f TEXT_POS_OFFSET = {20, 20};
-    const int MAX_TEXT_LINES = 3;
+    const sf::Vector2f TEXT_POS_OFFSET = {30, 60};
+    const int MAX_TEXT_LINES = 5;
     const float TIME_TILL_NEXT_CHAR = 0.05;    // after this time the next char of the text is drawn
-    const sf::Vector2f NAME_TEXT_POS_OFFSET = {15, 5};
+    const sf::Vector2f NAME_TEXT_POS_OFFSET = {23, 8};
+    const sf::Vector2f ARROW_POS_OFFSET = {30, 30};
 
     // *** private fields ***
     // SFML graphics
