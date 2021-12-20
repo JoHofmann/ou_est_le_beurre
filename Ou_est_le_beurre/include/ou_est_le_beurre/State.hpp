@@ -10,6 +10,7 @@ class Game;
 class State {
 public:
     State(Game const*);
+
     void update(float);
     virtual bool goalReached()=0;
 

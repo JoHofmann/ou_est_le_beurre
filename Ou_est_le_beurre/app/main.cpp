@@ -11,11 +11,12 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(globals::WIDTH, globals::HEIGHT), "Ou est le beurre?");
+    window.setFramerateLimit(30);
     Game game;
 
     // delta_t + clock
     sf::Clock clock;
-    float delta_t = 0;
+    float delta_t = 0;          // TODO change to sf::Time
 
     while (window.isOpen())
     {

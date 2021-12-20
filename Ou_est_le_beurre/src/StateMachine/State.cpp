@@ -17,4 +17,3 @@ void State::update(float delta_t) {
 float State::getElapsedTime() const {
     return elapsedTime;
 }
-

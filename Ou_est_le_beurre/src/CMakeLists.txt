@@ -5,9 +5,9 @@ set(HEADER_LIST "${ouEstLeBeurre_SOURCE_DIR}/include/ou_est_le_beurre/")
 # --- add libraries ---
 add_library(ouEstLeBeurreLib
         Game.cpp
-        Player.cpp
-        Textbox.cpp
-        GameObject.cpp
+        GameObjects/Player.cpp
+        GameObjects/Textbox.cpp
+        GameObjects/GameObject.cpp
         utils.cpp
         StateMachine/State.cpp
         StateMachine/TestState.cpp
