@@ -9,7 +9,7 @@
 #include <vector>
 
 namespace utils {
-    std::vector<std::string> split(const std::string &, char);
+    std::vector<std::wstring> split(const std::wstring &, wchar_t);
 }
 
 #endif //OUESTLEBEURRE_UTILS_HPP

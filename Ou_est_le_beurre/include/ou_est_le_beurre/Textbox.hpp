@@ -20,11 +20,11 @@ public:
     void update(float) override;
 
     // *** Getter and Setter ***
-    void set_text(std::string, std::string);
+    void set_text(std::wstring, std::wstring);
 
 private:
     // *** private functions ***
-    void crop_text_to_textbox(std::string &new_text);
+    void crop_text_to_textbox(std::wstring &new_text);
 
 
     // *** constants ***
@@ -45,7 +45,7 @@ private:
     sf::Text name_text_draw;
 
     // text animation
-    std::string text;       // the text to draw (not the complete text needs to be drawn at once)
+    std::wstring text;       // the text to draw (not the complete text needs to be drawn at once)
     int text_pointer_length;       // points to the position of the text that should be drawn
     int text_pointer_start;
     float text_animation_timer;

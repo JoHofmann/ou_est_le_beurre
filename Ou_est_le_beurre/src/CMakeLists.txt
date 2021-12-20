@@ -12,6 +12,7 @@ add_library(ouEstLeBeurreLib
         utils.cpp
         StateMachine/State.cpp
         StateMachine/TestState.cpp
+        StateMachine/OpeningState.cpp
         ${HEADER_LIST})
 
 # We need this directory, and users of our library will need it too

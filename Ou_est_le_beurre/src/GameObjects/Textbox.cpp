@@ -111,11 +111,11 @@ void Textbox::update(float delta_t)
     }
 }
 
-void Textbox::crop_text_to_textbox(std::string &new_text){
+void Textbox::crop_text_to_textbox(std::wstring &new_text){
     // crop text to textbox size
-    std::vector<std::string> token = utils::split(new_text, ' ');
-    std::ostringstream processed_text;
-    std::ostringstream tmp_text;
+    std::vector<std::wstring> token = utils::split(new_text, ' ');
+    std::wstringstream processed_text;
+    std::wstringstream tmp_text;
     tmp_text << token[0];
     token.erase(token.begin());
     for (auto t : token) {
@@ -123,11 +123,11 @@ void Textbox::crop_text_to_textbox(std::string &new_text){
         text_draw.setString(tmp_text.str());
         // true if text is bouncing out of the box
         if(text_draw.getLocalBounds().width < getShape().width - TEXT_POS_OFFSET.y*2){
-            processed_text.str(std::string(""));
+            processed_text.str(std::wstring(L""));
             processed_text << tmp_text.str();
         } else {
             processed_text << "\n" << t << std::flush;
-            tmp_text.str(std::string(""));
+            tmp_text.str(std::wstring(L""));
             tmp_text << processed_text.str();
         }
     }
@@ -137,7 +137,7 @@ void Textbox::crop_text_to_textbox(std::string &new_text){
 }
 
 // *** getter and setter ***
-void Textbox::set_text(std::string name, std::string new_text) {
+void Textbox::set_text(std::wstring name, std::wstring new_text) {
     crop_text_to_textbox(new_text);
     text = new_text;
     text_animation_timer = 0.0;

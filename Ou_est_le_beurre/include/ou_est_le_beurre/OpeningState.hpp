@@ -15,8 +15,12 @@ public:
     bool goalReached() override;
 private:
     void processState() override;
+    void prepareEpilog();
 
+    enum States {FADE_IN, EPILOG, FINISHED};
+    States state = FADE_IN;
     std::shared_ptr<Textbox> pTextbox;
+    std::shared_ptr<FadeObject> pFade;
 };
 
 

@@ -16,6 +16,7 @@
 #include "ou_est_le_beurre/State.hpp"
 #include "ou_est_le_beurre/GameObject.hpp"
 #include "ou_est_le_beurre/FadeObject.hpp"
+#include "ou_est_le_beurre/OpeningState.hpp"
 
 
 class Game {
