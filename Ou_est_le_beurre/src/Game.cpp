@@ -11,7 +11,7 @@ Game::Game()
 {
     // Background Music
     // load something into the sound buffer...
-    if (!soundBuffer.loadFromFile(AUDIO_PATH + "Background_Music_Test.WAV"))
+    if (!soundBuffer.loadFromFile(AUDIO_PATH + "Background_Music.wav"))
         std::cerr << "Problems while loading background music" << std::endl;
 
     backgroundMusic.setBuffer(soundBuffer);
