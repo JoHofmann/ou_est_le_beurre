@@ -47,6 +47,10 @@ private:
     // GameObject Vector
     std::vector<std::shared_ptr<GameObject>> gameObjects;
 
+    // background
+    sf::Sprite background;
+    sf::Texture tex_background;
+
     // Sound and Music
     sf::SoundBuffer soundBuffer;
     sf::Sound backgroundMusic;

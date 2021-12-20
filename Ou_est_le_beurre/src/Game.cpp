@@ -19,6 +19,11 @@ Game::Game()
 
     backgroundMusic.play();
 
+    // background
+    if(!tex_background.loadFromFile(TEXTURES_PATH + "kitchen.png")) {
+        std::cerr << "Problems while loading baackground texture" << std::endl;
+    }
+    background.setTexture(tex_background);
 
     pPlayer = std::make_shared<Player>("Momy.png");
     pTextbox = std::make_shared<Textbox>("Simple_Textbox.png");
@@ -66,20 +71,23 @@ void Game::draw(sf::RenderWindow &window)
 {
     window.clear(sf::Color::White);
 
-    // draw collision map (for testing)
-    for (int y = 0; y < globals::YTILECOUNT; ++y) {
-    	for (int x = 0; x < globals::XTILECOUNT; ++x) {
+    window.draw(background);
 
-    		if(globals::collision_map[y][x]) {
 
-        		sf::RectangleShape rect(sf::Vector2f(globals::TILESIZE, globals::TILESIZE));
-        		rect.setPosition(x * globals::TILESIZE, y * globals::TILESIZE);
-    			rect.setFillColor(sf::Color::Black);
-
-    			window.draw(rect);
-    		}
-    	}
-	}
+//    // draw collision map (for testing)
+//    for (int y = 0; y < globals::YTILECOUNT; ++y) {
+//    	for (int x = 0; x < globals::XTILECOUNT; ++x) {
+//
+//    		if(globals::collision_map[y][x]) {
+//
+//        		sf::RectangleShape rect(sf::Vector2f(globals::TILESIZE, globals::TILESIZE));
+//        		rect.setPosition(x * globals::TILESIZE, y * globals::TILESIZE);
+//    			rect.setFillColor(sf::Color::Black);
+//
+//    			window.draw(rect);
+//    		}
+//    	}
+//	}
 
     // draw gameObjects
     for (auto it = gameObjects.begin(); it != gameObjects.end(); ++it) {
