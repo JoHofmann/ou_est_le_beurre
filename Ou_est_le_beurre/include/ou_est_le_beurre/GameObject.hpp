@@ -21,13 +21,13 @@ public:
     virtual void setShape(const sf::IntRect &shape);
 
 protected:
-    sf::Vector2f position;
-    sf::IntRect shape;
     bool enabled;
     // TODO implement scale to zoom
 
 
 private:
+    sf::Vector2f position;
+    sf::IntRect shape;
 };
 
 

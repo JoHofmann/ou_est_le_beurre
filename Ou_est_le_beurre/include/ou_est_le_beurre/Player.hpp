@@ -24,7 +24,7 @@ public:
     void update(float) override;
     void draw(sf::RenderTarget &, sf::RenderStates) const override;
 
-    void setGridPosition(sf::Vector2i&);
+    void setGridPosition(sf::Vector2i);
     sf::Vector2i& getGridPosition();
 
     void setMoveable(bool);

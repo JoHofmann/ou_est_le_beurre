@@ -25,7 +25,7 @@ Player::Player(const std::string &tex_path) :
 //	shape = sprite.getGlobalBounds();
 
 	// init player position in middle
-	position = sf::Vector2f(globals::WIDTH/2.f, globals::HEIGHT/2.f);
+	this->setPosition(sf::Vector2f(globals::WIDTH/2.f, globals::HEIGHT/2.f));
 	sprite.setPosition(this->getPosition());
 }
 
@@ -36,11 +36,11 @@ void Player::update(float delta_t) {
 
 	if(enabled) {
 		// update positions
-		gridPostion = sf::Vector2i(position) / globals::TILESIZE;
+		gridPostion = sf::Vector2i(this->getPosition()) / globals::TILESIZE;
 
 		moveTile(delta_t);
 
-		sprite.setPosition(position);
+		sprite.setPosition(this->getPosition());
 	}
 }
 
@@ -65,7 +65,7 @@ void Player::moveTile(float delta_t) {
 
 	if(!moving) {	// init move
 
-		startPos = position;
+		startPos = this->getPosition();
 
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { 			// move up
 			direction = UP;
@@ -148,16 +148,16 @@ void Player::moveTile(float delta_t) {
 
 		switch(direction) {
 		case UP:
-			position = sf::Vector2f(startPos.x, startPos.y - (globals::TILESIZE * progress));
+			this->setPosition(sf::Vector2f(startPos.x, startPos.y - (globals::TILESIZE * progress)));
 			break;
 		case LEFT:
-			position = sf::Vector2f(startPos.x - (globals::TILESIZE * progress), startPos.y);
+			this->setPosition(sf::Vector2f(startPos.x - (globals::TILESIZE * progress), startPos.y));
 			break;
 		case DOWN:
-			position = sf::Vector2f(startPos.x, startPos.y + (globals::TILESIZE * progress));
+			this->setPosition(sf::Vector2f(startPos.x, startPos.y + (globals::TILESIZE * progress)));
 			break;
 		case RIGHT:
-			position = sf::Vector2f(startPos.x + (globals::TILESIZE * progress), startPos.y);
+			this->setPosition(sf::Vector2f(startPos.x + (globals::TILESIZE * progress), startPos.y));
 			break;
 
 		default:
@@ -173,8 +173,9 @@ bool Player::inMap(int x, int y) {
 	return x >= 0 && y >= 0 && x < globals::XTILECOUNT && y < globals::YTILECOUNT;
 }
 
-void Player::setGridPosition(sf::Vector2i& _gridPosition) {
-	position = sf::Vector2f(_gridPosition.x * globals::TILESIZE, _gridPosition.y * globals::TILESIZE);
+void Player::setGridPosition(sf::Vector2i _gridPosition) {
+    this->setPosition(static_cast<sf::Vector2f>(_gridPosition * globals::TILESIZE));
+	//position = sf::Vector2f(_gridPosition.x * globals::TILESIZE, _gridPosition.y * globals::TILESIZE);
 }
 
 sf::Vector2i& Player::getGridPosition() {
