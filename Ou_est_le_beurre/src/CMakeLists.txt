@@ -9,11 +9,14 @@ add_library(ouEstLeBeurreLib
         GameObjects/Textbox.cpp
         GameObjects/GameObject.cpp
         GameObjects/FadeObject.cpp
+        GameObjects/Tile.cpp   
+        GameObjects/Tilemap.cpp     
         utils.cpp
-        Tile.cpp
         StateMachine/State.cpp
         StateMachine/TestState.cpp
         StateMachine/OpeningState.cpp
+        Events/Event.cpp
+        Events/EggPan.cpp
         ${HEADER_LIST})
 
 # We need this directory, and users of our library will need it too

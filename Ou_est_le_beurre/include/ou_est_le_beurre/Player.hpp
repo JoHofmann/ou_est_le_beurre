@@ -11,14 +11,15 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include "ou_est_le_beurre/globals.hpp"
-#include "GameObject.hpp"
+#include "ou_est_le_beurre/GameObject.hpp"
+#include "ou_est_le_beurre/Tilemap.hpp"
 
 enum Direction { UP, LEFT, DOWN, RIGHT };
 
 class Player : public GameObject
 {
 public:
-	Player(const std::string &);
+	Player(const std::string &, Tilemap *);
 	~Player();
 
     void update(float) override;
@@ -40,6 +41,7 @@ private:
 
 	// position + direction
 	sf::Vector2i gridPostion;	// position in grid postion(2 * TILESIZE, 3 * TILESIZE) -> gridPosition(2, 3)
+	sf::Vector2i observed;
 
 	Direction direction;
 
@@ -48,6 +50,8 @@ private:
 	const float offsetTime;		// time to wait between rotating and moving
 
 	bool moveable;
+
+	Tilemap *pTilemap;
 };
 
 #endif

@@ -11,7 +11,6 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 
-#include "ou_est_le_beurre/Game.hpp"
 #include "ou_est_le_beurre/GameObject.hpp"
 #include "ou_est_le_beurre/Textbox.hpp"
 #include "ou_est_le_beurre/globals.hpp"
@@ -20,15 +19,13 @@
 class Tile : public GameObject{
 public:
 
-	Tile(bool);
-	~Tile();
+	Tile(int* _indexPointer, int, bool);
 
 	void setWalkable(bool);
 	bool getWalkable();
-	void setEnabled(bool);
-	void setActionTextbox(Textbox&);
+	void setEventIndex(int);
 
-	void action();
+	void triggerd();
 
 	const sf::Vector2i& getGridPosition();
     void update(float) override;
@@ -38,8 +35,9 @@ private:
 
 private:
 	bool walkable;
-	bool actionable;
-    void (*action)(Game const *);
+
+	int eventIndex;
+	int *indexPointer;
 };
 
 

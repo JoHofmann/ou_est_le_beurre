@@ -7,10 +7,15 @@
 
 #include "ou_est_le_beurre/Tile.hpp"
 
-Tile::Tile(bool _walkable) : walkable(_walkable)
-{
-    this->setEnabled(true);
+#include <iostream>
 
+// if no event eventIndex should be -1!
+Tile::Tile(int *_indexPointer, int _eventIndex, bool _walkable) :
+	eventIndex(_eventIndex),
+	walkable(_walkable),
+	indexPointer(_indexPointer)
+{
+	this->set_enabled(true);
 }
 
 void Tile::setWalkable(bool _walkable) {
@@ -21,19 +26,13 @@ bool Tile::getWalkable() {
 	return walkable;
 }
 
-void Tile::setEnabled(bool _enabled) {
-	enabled = _enabled;
+void Tile::setEventIndex(int _eventIndex) {
+	eventIndex = _eventIndex;
 }
 
-void Tile::setActionTextbox(Textbox& textbox) {
-	actionable = true;
-
-
-}
-
-void Tile::action() {
-	if(actionable && enabled) {
-
+void Tile::triggerd() {
+	if((eventIndex != -1) && enabled) {
+		*indexPointer = eventIndex;
 	}
 }
 

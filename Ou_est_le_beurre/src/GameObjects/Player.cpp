@@ -9,8 +9,12 @@
 
 #include <iostream>
 
-Player::Player(const std::string &tex_path) :
-	direction(DOWN), timePerTile(0.25f), offsetTime(0.1f), moveable(true)
+Player::Player(const std::string &tex_path, Tilemap* _pTilemap) :
+	direction(DOWN),
+	timePerTile(0.25f),
+	offsetTime(0.1f),
+	moveable(true),
+	pTilemap(_pTilemap)
 {
 	// load whole texture
     if (!texture.loadFromFile(TEXTURES_PATH + tex_path))
@@ -38,7 +42,28 @@ void Player::update(float delta_t) {
 		// update positions
 		gridPostion = sf::Vector2i(this->getPosition()) / globals::TILESIZE;
 
-		moveTile(delta_t);
+		observed = gridPostion;
+		switch(direction) {
+		case UP: 	observed.y -= 1;
+			break;
+		case RIGHT:	observed.x += 1;
+			break;
+		case DOWN:	observed.y += 1;
+			break;
+		case LEFT:	observed.x -= 1;
+			break;
+		}
+
+//		std::cout << observed.x << "\t" << observed.y << std::endl;
+
+		if(inMap(observed.x, observed.y) && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+//			std::cout << "Tile event triggerd" << std::endl;
+			pTilemap->getTile(observed)->triggerd();
+		}
+
+		if(moveable) {
+			moveTile(delta_t);
+		}
 
 		sprite.setPosition(this->getPosition());
 	}
@@ -175,7 +200,6 @@ bool Player::inMap(int x, int y) {
 
 void Player::setGridPosition(sf::Vector2i _gridPosition) {
     this->setPosition(static_cast<sf::Vector2f>(_gridPosition * globals::TILESIZE));
-	//position = sf::Vector2f(_gridPosition.x * globals::TILESIZE, _gridPosition.y * globals::TILESIZE);
 }
 
 sf::Vector2i& Player::getGridPosition() {

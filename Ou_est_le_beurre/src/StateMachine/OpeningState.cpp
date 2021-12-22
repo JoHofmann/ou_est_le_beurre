@@ -15,7 +15,7 @@ OpeningState::OpeningState(Game const *game) : State(game){
     pFade->startFade();
     // TODO momy at door
     pPlayer->setGridPosition(sf::Vector2i(3, 0));
-    pPlayer->setMoveable(false);
+    pPlayer->setMoveable(true);
 
     // TODO lock player control
 }

@@ -7,7 +7,8 @@
 
 #include <iostream>
 
-Game::Game()
+Game::Game() :
+	tilemap(&eventIndex)
 {
     // Background Music
     // load something into the sound buffer...
@@ -25,7 +26,7 @@ Game::Game()
     }
     background.setTexture(tex_background);
 
-    pPlayer = std::make_shared<Player>("Momy.png");
+    pPlayer = std::make_shared<Player>("Momy.png", &tilemap);
     pTextbox = std::make_shared<Textbox>("Simple_Textbox.png");
     pFade = std::make_shared<FadeObject>();
 
@@ -35,6 +36,12 @@ Game::Game()
     gameObjects.push_back(pTextbox);
     gameObjects.push_back(pFade);
 
+    // events
+    eventIndex = -1;	// default -> no event will be updated
+
+    pEggPan = std::make_shared<EggPan>();
+
+    events.push_back(pEggPan);
 
     // TODO add all states to states vector
     // TODO I really don't know how I can put a child of State into a vector of states
@@ -61,6 +68,13 @@ void Game::updateStateMachine(float delta_t){
 void Game::update(float delta_t)
 {
     updateStateMachine(delta_t);
+
+    // update current event
+    if(eventIndex != -1) {
+    	events[eventIndex]->update(delta_t);
+    }
+	std::cout << eventIndex << std::endl;
+
 
     // TODO update all game objects general
     // update gameObjects
@@ -113,5 +127,14 @@ const std::shared_ptr<FadeObject> &Game::getPFade() const {
 const std::shared_ptr<Player> &Game::getPlayer() const {
 	return pPlayer;
 }
+
+const int Game::getEventIndex() {
+	return eventIndex;
+}
+
+void Game::setEventIndex(int _eventIndex) {
+	eventIndex = _eventIndex;
+}
+
 
 
