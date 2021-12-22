@@ -7,11 +7,9 @@
 
 #include "ou_est_le_beurre/Tile.hpp"
 
-Tile::Tile(bool _walkable) :
-	walkable(_walkable),
-	actionable(false),
-	enabled(false)
+Tile::Tile(bool _walkable) : walkable(_walkable)
 {
+    this->setEnabled(true);
 
 }
 
@@ -38,6 +36,18 @@ void Tile::action() {
 
 	}
 }
+
+void Tile::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+    if(enabled){
+        // Since we don't draw the individual tiles yet this function is empty
+    }
+    return;
+}
+
+void Tile::update(float) {
+    return;
+}
+
 
 
 

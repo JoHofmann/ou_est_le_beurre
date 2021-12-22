@@ -11,11 +11,13 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 
+#include "ou_est_le_beurre/Game.hpp"
+#include "ou_est_le_beurre/GameObject.hpp"
 #include "ou_est_le_beurre/Textbox.hpp"
 #include "ou_est_le_beurre/globals.hpp"
 
 
-class Tile{
+class Tile : public GameObject{
 public:
 
 	Tile(bool);
@@ -29,14 +31,15 @@ public:
 	void action();
 
 	const sf::Vector2i& getGridPosition();
-	const sf::Vector2f& getPosition();
+    void update(float) override;
+    void draw(sf::RenderTarget&, sf::RenderStates) const override;
 
 private:
 
 private:
-	bool enabled;
 	bool walkable;
 	bool actionable;
+    void (*action)(Game const *);
 };
 
 
