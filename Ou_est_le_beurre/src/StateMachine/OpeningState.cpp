@@ -10,6 +10,7 @@ OpeningState::OpeningState(Game const *game) : State(game){
     pFade = game->getPFade();
 
     // TODO initialize scene
+    pTextbox->set_enabled(false);
     pFade->startFade();
     // TODO momy at door
     // TODO lock player control
