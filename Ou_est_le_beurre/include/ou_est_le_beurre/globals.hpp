@@ -14,7 +14,7 @@
 namespace globals{
     const int FPS = 30;
 
-	const int TILESIZE = 32;
+	const int TILESIZE = 64;
 
 	const int XTILECOUNT = 20;
 	const int YTILECOUNT = 10;

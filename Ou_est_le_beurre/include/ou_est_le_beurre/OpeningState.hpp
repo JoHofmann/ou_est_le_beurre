@@ -21,6 +21,7 @@ private:
     States state = FADE_IN;
     std::shared_ptr<Textbox> pTextbox;
     std::shared_ptr<FadeObject> pFade;
+    std::shared_ptr<Player> pPlayer;
 };
 
 

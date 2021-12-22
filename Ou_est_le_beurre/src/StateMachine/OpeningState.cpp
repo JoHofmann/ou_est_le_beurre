@@ -8,10 +8,14 @@
 OpeningState::OpeningState(Game const *game) : State(game){
     pTextbox = game->getPTextbox();
     pFade = game->getPFade();
+    pPlayer = game->getPlayer();
 
     // TODO initialize scene
     pFade->startFade();
     // TODO momy at door
+    pPlayer->setGridPosition(sf::Vector2i(2, 0));
+    pPlayer->setMoveable(false);
+
     // TODO lock player control
 }
 

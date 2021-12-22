@@ -24,6 +24,12 @@ public:
     void update(float) override;
     void draw(sf::RenderTarget &, sf::RenderStates) const override;
 
+    void setGridPosition(sf::Vector2i&);
+    sf::Vector2i& getGridPosition();
+
+    void setMoveable(bool);
+    bool getMoveable();
+
 private:
 	void moveTile(float);
 	bool inMap(int, int);
@@ -40,6 +46,8 @@ private:
 	// moveTile
 	const float timePerTile;	// in seconds
 	const float offsetTime;		// time to wait between rotating and moving
+
+	bool moveable;
 };
 
 #endif

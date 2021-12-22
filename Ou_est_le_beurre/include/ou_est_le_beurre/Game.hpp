@@ -31,6 +31,7 @@ public:
     // *** Getter and Setter ***
     const std::shared_ptr<Textbox> &getPTextbox() const;
     const std::shared_ptr<FadeObject> &getPFade() const;
+    const std::shared_ptr<Player> &getPlayer() const;
 
 private:
 

@@ -10,6 +10,7 @@ add_library(ouEstLeBeurreLib
         GameObjects/GameObject.cpp
         GameObjects/FadeObject.cpp
         utils.cpp
+        Tile.cpp
         StateMachine/State.cpp
         StateMachine/TestState.cpp
         StateMachine/OpeningState.cpp

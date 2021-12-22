@@ -110,3 +110,8 @@ const std::shared_ptr<FadeObject> &Game::getPFade() const {
     return pFade;
 }
 
+const std::shared_ptr<Player> &Game::getPlayer() const {
+	return pPlayer;
+}
+
+

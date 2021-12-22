@@ -10,7 +10,7 @@
 #include <iostream>
 
 Player::Player(const std::string &tex_path) :
-	direction(DOWN), timePerTile(0.25f), offsetTime(0.1f)
+	direction(DOWN), timePerTile(0.25f), offsetTime(0.1f), moveable(true)
 {
 	// load whole texture
     if (!texture.loadFromFile(TEXTURES_PATH + tex_path))
@@ -26,7 +26,7 @@ Player::Player(const std::string &tex_path) :
 
 	// init player position in middle
 	position = sf::Vector2f(globals::WIDTH/2.f, globals::HEIGHT/2.f);
-	sprite.setPosition(position);
+	sprite.setPosition(this->getPosition());
 }
 
 Player::~Player() {
@@ -173,6 +173,21 @@ bool Player::inMap(int x, int y) {
 	return x >= 0 && y >= 0 && x < globals::XTILECOUNT && y < globals::YTILECOUNT;
 }
 
+void Player::setGridPosition(sf::Vector2i& _gridPosition) {
+	position = sf::Vector2f(_gridPosition.x * globals::TILESIZE, _gridPosition.y * globals::TILESIZE);
+}
+
+sf::Vector2i& Player::getGridPosition() {
+	return gridPostion;
+}
+
+void Player::setMoveable(bool _moveable) {
+	moveable = _moveable;
+}
+
+bool Player::getMoveable() {
+	return moveable;
+}
 
 
 
