@@ -16,24 +16,20 @@ namespace globals{
 
 	const int TILESIZE = 64;
 
-	const int XTILECOUNT = 20;
-	const int YTILECOUNT = 10;
+	const int XTILECOUNT = 8;
+	const int YTILECOUNT = 6;
 
     const int WIDTH  = XTILECOUNT * TILESIZE;
     const int HEIGHT = YTILECOUNT * TILESIZE;
 
     // TODO mit richtigem Bild von Schnuggi abgleichen ggf überarbeiten
     const char collision_map[YTILECOUNT][XTILECOUNT] =
-       {{ 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-		{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-		{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-		{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-		{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1 },
-		{ 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1 },
-		{ 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-		{ 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-		{ 1, 1, 1, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-		{ 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }};
+       {{ 1, 1, 1, 0, 1, 1, 1, 1},
+		{ 1, 1, 1, 0, 0, 0, 0, 1},
+		{ 0, 0, 0, 0, 0, 0, 0, 1},
+		{ 0, 0, 0, 0, 1, 0, 0, 1},
+		{ 0, 1, 1, 0, 1, 0, 0, 1},
+		{ 0, 0, 0, 0, 1, 1, 1, 1}};
 }
 
 #endif //OUESTLEBEURRE_GLOBALS_HPP

@@ -14,7 +14,7 @@ OpeningState::OpeningState(Game const *game) : State(game){
     pTextbox->set_enabled(false);
     pFade->startFade();
     // TODO momy at door
-    pPlayer->setGridPosition(sf::Vector2i(2, 0));
+    pPlayer->setGridPosition(sf::Vector2i(3, 0));
     pPlayer->setMoveable(false);
 
     // TODO lock player control
