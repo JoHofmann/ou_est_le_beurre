@@ -11,6 +11,7 @@ OpeningState::OpeningState(Game const *game) : State(game){
     pPlayer = game->getPlayer();
 
     // TODO initialize scene
+    pTextbox->set_enabled(false);
     pFade->startFade();
     // TODO momy at door
     pPlayer->setGridPosition(sf::Vector2i(2, 0));

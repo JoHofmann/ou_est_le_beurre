@@ -44,6 +44,9 @@ Textbox::Textbox(const std::string &name) {
     name_text_draw.setCharacterSize(14);
     name_text_draw.setFillColor(sf::Color::Black);
     name_text_draw.setPosition(this->getPosition().x + NAME_TEXT_POS_OFFSET.x, this->getPosition().y + NAME_TEXT_POS_OFFSET.y);
+
+    this->set_text(L"", L"");
+    this->set_enabled(false);
 }
 
 Textbox::~Textbox() = default;
