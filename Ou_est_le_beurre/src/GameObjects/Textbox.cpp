@@ -94,7 +94,8 @@ void Textbox::update(float delta_t)
                     // close textbox if text is done
                     if(text_pointer_start + text_pointer_length >= text.size() -1){
                         this->set_enabled(false);
-                        // TODO set something so that the main game can continue
+                        // indicate that the job of the textbox is done
+                        text_is_finished = true;
                     }
                     drawn_line_counter = 0;
                     text_pointer_start += text_pointer_length + 1;       // +1 to skip one newline
@@ -152,6 +153,11 @@ void Textbox::set_text(std::wstring name, std::wstring new_text) {
     stop_typing_text = false;
     arrow_motion_counter = 0;
     arrow_motion_direction = {0, -1};
+    text_is_finished = false;
 
     name_text_draw.setString(name);
+}
+
+bool Textbox::isTextIsFinished() const {
+    return text_is_finished;
 }
