@@ -40,8 +40,8 @@ Game::Game()
     // events
     eventIndex = -1;	// default -> no event will be updated
 
-    pFridgeEvent = std::make_shared<TextboxEvent>(L"Muttern", L"Kühlschrank");
-    pEggPanEvent = std::make_shared<TextboxEvent>(L"Muttern", L"Schon wieder die dreckige Pfanne (schüttelt den Kopf)");
+    pFridgeEvent = std::make_shared<TextboxEvent>(this, L"Muttern", L"Kühlschrank");
+    pEggPanEvent = std::make_shared<TextboxEvent>(this, L"Muttern", L"Schon wieder die dreckige Pfanne (schüttelt den Kopf)");
 
     events.push_back(pFridgeEvent);
     events.push_back(pEggPanEvent);
@@ -86,7 +86,6 @@ void Game::update(float delta_t)
     if(eventIndex != -1) {
     	events[eventIndex]->update(delta_t);
     }
-	std::cout << eventIndex << std::endl;
 
 
     // TODO update all game objects general

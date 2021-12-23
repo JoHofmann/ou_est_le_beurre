@@ -24,9 +24,9 @@ OpeningState::OpeningState(Game *game) : State(game) {
 }
 
 bool OpeningState::goalReached() {
-    if(state == FINISHED){
-        return true;
-    }
+//    if(state == FINISHED){
+//        return true;
+//    }
     return false;
 }
 

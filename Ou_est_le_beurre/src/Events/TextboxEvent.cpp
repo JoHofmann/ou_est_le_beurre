@@ -6,29 +6,31 @@
  */
 
 #include "ou_est_le_beurre/Events/TextboxEvent.hpp"
+#include "ou_est_le_beurre/Game.hpp"
 
 #include <iostream>
 
-TextboxEvent::TextboxEvent(std::wstring tb_name, std::wstring tb_text) :
-	textbox("Simple_Textbox.png")
+TextboxEvent::TextboxEvent(Game *game, std::wstring tb_name, std::wstring tb_text) :
+	game(game), textbox_name(tb_name), textbox_text(tb_text)
 {
-	this->setEnabled(false);
+	textbox = game->getPTextbox();
 
-	textbox.set_enabled(false);
-	textbox.set_text(tb_name, tb_text);
+	this->setEnabled(false);
 }
 
 void TextboxEvent::init() {
-	textbox.set_enabled(true);
-
-	std::cout << "Textbox event started" << std::endl;
+	if(textbox->isTextIsFinished() && this->getEnabled()) {
+		textbox->set_text(textbox_name, textbox_text);
+		textbox->set_enabled(true);
+	}
 }
 
 void TextboxEvent::update(float delta_t) {
 
 	if(this->getEnabled()) {
-		if(textbox.isTextIsFinished()) {
+		if(textbox->isTextIsFinished()) {
 			this->setEnabled(false);
+			std::cout << "Textbox event finished" << std::endl;
 		}
 	}
 }

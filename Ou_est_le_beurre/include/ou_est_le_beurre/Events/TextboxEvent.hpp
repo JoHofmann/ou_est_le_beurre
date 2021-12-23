@@ -9,18 +9,26 @@
 #define INCLUDE_OU_EST_LE_BEURRE_EVENTS_TEXTBOXEVENT_HPP_
 
 #include <string>
+#include <memory>
 #include "ou_est_le_beurre/Events/Event.hpp"
 #include "ou_est_le_beurre/Textbox.hpp"
 
+class Game;
+
 class TextboxEvent : public Event {
 public:
-	TextboxEvent(std::wstring, std::wstring);
+	TextboxEvent(Game *, std::wstring, std::wstring);
 
 	void init();
 	void update(float) override;
 
 private:
-	Textbox textbox;
+	std::shared_ptr<Textbox> textbox;
+
+	std::wstring textbox_name;
+	std::wstring textbox_text;
+
+	Game *game;
 };
 
 #endif /* INCLUDE_OU_EST_LE_BEURRE_EVENTS_TEXTBOXEVENT_HPP_ */
