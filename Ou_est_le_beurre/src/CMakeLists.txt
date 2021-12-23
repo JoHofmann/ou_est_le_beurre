@@ -16,7 +16,7 @@ add_library(ouEstLeBeurreLib
         StateMachine/TestState.cpp
         StateMachine/OpeningState.cpp
         Events/Event.cpp
-        Events/EggPan.cpp
+        Events/TextboxEvent.cpp
         ${HEADER_LIST})
 
 # We need this directory, and users of our library will need it too

@@ -54,10 +54,8 @@ void Player::update(float delta_t) {
 			break;
 		}
 
-//		std::cout << observed.x << "\t" << observed.y << std::endl;
-
+		// trigger observed tile
 		if(inMap(observed.x, observed.y) && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
-//			std::cout << "Tile event triggerd" << std::endl;
 			pTilemap->getTile(observed)->triggerd();
 		}
 
@@ -65,6 +63,7 @@ void Player::update(float delta_t) {
 			moveTile(delta_t);
 		}
 
+		// update sprite position
 		sprite.setPosition(this->getPosition());
 	}
 }

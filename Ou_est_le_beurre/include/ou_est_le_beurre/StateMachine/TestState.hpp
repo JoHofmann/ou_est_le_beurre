@@ -5,12 +5,12 @@
 #ifndef OUESTLEBEURRE_TESTSTATE_HPP
 #define OUESTLEBEURRE_TESTSTATE_HPP
 
-#include "ou_est_le_beurre/State.hpp"
+#include "ou_est_le_beurre/StateMachine/State.hpp"
 #include "ou_est_le_beurre/Game.hpp"
 
 class TestState : public State{
 public:
-    TestState(Game const*);
+    TestState(Game *);
 
     bool goalReached() override;
 private:

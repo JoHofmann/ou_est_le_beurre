@@ -10,16 +10,16 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include "Events/TextboxEvent.hpp"
 #include "ou_est_le_beurre/globals.hpp"
 #include "ou_est_le_beurre/Player.hpp"
 #include "ou_est_le_beurre/Textbox.hpp"
-#include "ou_est_le_beurre/State.hpp"
+#include "ou_est_le_beurre/StateMachine/State.hpp"
 #include "ou_est_le_beurre/GameObject.hpp"
 #include "ou_est_le_beurre/FadeObject.hpp"
-#include "ou_est_le_beurre/OpeningState.hpp"
+#include "ou_est_le_beurre/StateMachine/OpeningState.hpp"
 #include "ou_est_le_beurre/Tilemap.hpp"
 
-#include "ou_est_le_beurre/Events/EggPan.hpp"
 
 
 class Game {
@@ -35,6 +35,8 @@ public:
     const std::shared_ptr<Textbox> &getPTextbox() const;
     const std::shared_ptr<FadeObject> &getPFade() const;
     const std::shared_ptr<Player> &getPlayer() const;
+
+    std::vector<std::shared_ptr<Event>> &getEvents();
 
     const int getEventIndex();
     void setEventIndex(int);
@@ -67,7 +69,8 @@ private:
 
     // events
     int eventIndex;
-    std::shared_ptr<EggPan> pEggPan;
+    std::shared_ptr<TextboxEvent> pEggPanEvent;
+    std::shared_ptr<TextboxEvent> pFridgeEvent;
 
     std::vector<std::shared_ptr<Event>> events;
 };

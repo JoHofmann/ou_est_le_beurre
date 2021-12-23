@@ -7,14 +7,6 @@
 
 #include "ou_est_le_beurre/Events/Event.hpp"
 
-void Event::setFinished(bool _finished) {
-	finished = _finished;
-}
-
-bool Event::getFinished() {
-	return finished;
-}
-
 void Event::setEnabled(bool _enabled) {
 	enabled = _enabled;
 }

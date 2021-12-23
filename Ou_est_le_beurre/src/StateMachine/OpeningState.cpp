@@ -2,13 +2,15 @@
 // Created by paddy on 20.12.21.
 //
 
-#include "ou_est_le_beurre/OpeningState.hpp"
+#include "ou_est_le_beurre/StateMachine/OpeningState.hpp"
 
 
-OpeningState::OpeningState(Game const *game) : State(game){
+OpeningState::OpeningState(Game *game) : State(game) {
     pTextbox = game->getPTextbox();
     pFade = game->getPFade();
     pPlayer = game->getPlayer();
+
+    events = game->getEvents();
 
     // TODO initialize scene
     pTextbox->set_enabled(false);
@@ -17,7 +19,8 @@ OpeningState::OpeningState(Game const *game) : State(game){
     pPlayer->setGridPosition(sf::Vector2i(3, 0));
     pPlayer->setMoveable(true);
 
-    // TODO lock player control
+    // TODO set all events true
+    events[0]->setEnabled(true);	// fridge event
 }
 
 bool OpeningState::goalReached() {

@@ -3,7 +3,7 @@
 //
 
 #include "ou_est_le_beurre/Game.hpp"
-#include "ou_est_le_beurre/TestState.hpp"
+#include "ou_est_le_beurre/StateMachine/TestState.hpp"
 
 #include <iostream>
 
@@ -39,9 +39,21 @@ Game::Game() :
     // events
     eventIndex = -1;	// default -> no event will be updated
 
-    pEggPan = std::make_shared<EggPan>();
+    pFridgeEvent = std::make_shared<TextboxEvent>(L"Muttern", L"Kühlschrank");
+    pEggPanEvent = std::make_shared<TextboxEvent>(L"Muttern", L"Schon wieder die dreckige Pfanne (schüttelt den Kopf)");
 
-    events.push_back(pEggPan);
+    events.push_back(pFridgeEvent);
+    events.push_back(pEggPanEvent);
+
+    // tilemap
+    std::vector<sf::Vector2i> eventTiles;
+
+    // TODO add event Tiles in correct order!!!!
+    eventTiles.push_back(sf::Vector2i(2, 2));
+    eventTiles.push_back(sf::Vector2i(2, 3));
+
+
+    tilemap.setEvents(eventTiles);
 
     // TODO add all states to states vector
     // TODO I really don't know how I can put a child of State into a vector of states
@@ -73,7 +85,7 @@ void Game::update(float delta_t)
     if(eventIndex != -1) {
     	events[eventIndex]->update(delta_t);
     }
-	std::cout << eventIndex << std::endl;
+//	std::cout << eventIndex << std::endl;
 
 
     // TODO update all game objects general
@@ -127,6 +139,12 @@ const std::shared_ptr<FadeObject> &Game::getPFade() const {
 const std::shared_ptr<Player> &Game::getPlayer() const {
 	return pPlayer;
 }
+
+std::vector<std::shared_ptr<Event>> &Game::getEvents() {
+	return events;
+}
+
+
 
 const int Game::getEventIndex() {
 	return eventIndex;
