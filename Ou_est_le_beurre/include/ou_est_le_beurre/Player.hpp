@@ -17,7 +17,7 @@
 
 class Tilemap;
 
-enum Direction { DOWN, RIGHT, LEFT, UP };
+enum Direction { DOWN, RIGHT, LEFT, UP, IDLE };
 
 class Player : public GameObject
 {
@@ -30,6 +30,9 @@ public:
 
     void setGridPosition(sf::Vector2i);
     sf::Vector2i& getGridPosition();
+    void setCtrlDirection(Direction, bool);
+
+    bool isMoving();
 
     void setMoveable(bool);
     bool getMoveable();
@@ -47,6 +50,7 @@ private:
 	sf::Vector2i observed;
 
 	Direction direction;
+	Direction ctrl_direction;
 
 	// moveTile
 	const float timePerTile;	// in seconds
@@ -54,6 +58,9 @@ private:
 
 
 	bool moveable;
+	bool moving;
+
+	bool rot_only;
 
     void setWalkingAnimation(float);
 	std::shared_ptr<Tilemap> pTilemap;
