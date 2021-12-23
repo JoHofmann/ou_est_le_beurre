@@ -5,11 +5,15 @@
 #ifndef OUESTLEBEURRE_STATE_HPP
 #define OUESTLEBEURRE_STATE_HPP
 
+#include <vector>
+#include <memory>
+
 class Game;
+class Event;
 
 class State {
 public:
-    State(Game const*);
+    State(Game *);
 
     void update(float);
     virtual bool goalReached()=0;
@@ -17,8 +21,10 @@ public:
     // *** Getter and Setter ***
     float getElapsedTime() const;
 
+
 protected:
-    Game const* game;
+    Game *game;
+    std::vector<std::shared_ptr<Event>> events;
     virtual void processState()=0;
 private:
     // *** private fields ***

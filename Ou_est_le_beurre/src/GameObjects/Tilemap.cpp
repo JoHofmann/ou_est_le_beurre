@@ -20,13 +20,17 @@ Tilemap::Tilemap(int* indexPointer) {
 
 		tilemap.push_back(tmp_vec);
 	}
-
-	// add events to tiles
-	tilemap[2][2]->setEventIndex(0);
 }
 
 Tilemap::~Tilemap() {
 	// TODO Auto-generated destructor stub
+}
+
+void Tilemap::setEvents(std::vector<sf::Vector2i> &eventTiles) {
+	// add events to tiles
+	for (int i = 0; i < eventTiles.size(); i++) {
+		tilemap[eventTiles[i].y][eventTiles[i].x]->setEventIndex(i);
+	}
 }
 
 void Tilemap::update(float) {

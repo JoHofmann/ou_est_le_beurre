@@ -14,9 +14,6 @@ public:
 
 	virtual void update(float) = 0;
 
-	virtual void setFinished(bool);
-	virtual bool getFinished();
-
 	virtual void setEnabled(bool);
 	virtual bool getEnabled();
 
@@ -24,7 +21,6 @@ protected:
 
 
 private:
-	bool finished;
 	bool enabled;
 
 };

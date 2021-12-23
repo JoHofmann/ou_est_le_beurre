@@ -2,9 +2,11 @@
 // Created by paddy on 08.12.21.
 //
 
-#include "ou_est_le_beurre/State.hpp"
+#include "ou_est_le_beurre/StateMachine/State.hpp"
 
-State::State(Game const *game) : game(game) {
+State::State(Game *game) :
+	game(game)
+{
     elapsedTime = 0.0;
 }
 

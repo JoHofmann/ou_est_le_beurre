@@ -20,6 +20,8 @@ public:
 	Tilemap(int*);
 	~Tilemap();
 
+	void setEvents(std::vector<sf::Vector2i> &);
+
 	void update(float) override;
     void draw(sf::RenderTarget &, sf::RenderStates) const override;
 
