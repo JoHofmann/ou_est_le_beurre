@@ -17,6 +17,9 @@
 #include "ou_est_le_beurre/GameObject.hpp"
 #include "ou_est_le_beurre/FadeObject.hpp"
 #include "ou_est_le_beurre/OpeningState.hpp"
+#include "ou_est_le_beurre/Tilemap.hpp"
+
+#include "ou_est_le_beurre/Events/EggPan.hpp"
 
 
 class Game {
@@ -32,6 +35,9 @@ public:
     const std::shared_ptr<Textbox> &getPTextbox() const;
     const std::shared_ptr<FadeObject> &getPFade() const;
     const std::shared_ptr<Player> &getPlayer() const;
+
+    const int getEventIndex();
+    void setEventIndex(int);
 
 private:
 
@@ -55,6 +61,15 @@ private:
     // Sound and Music
     sf::SoundBuffer soundBuffer;
     sf::Sound backgroundMusic;
+
+    // tilemap
+    Tilemap tilemap;
+
+    // events
+    int eventIndex;
+    std::shared_ptr<EggPan> pEggPan;
+
+    std::vector<std::shared_ptr<Event>> events;
 };
 
 
