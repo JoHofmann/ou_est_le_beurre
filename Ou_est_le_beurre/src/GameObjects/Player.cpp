@@ -13,10 +13,13 @@
 
 Player::Player(const std::string &tex_path, std::shared_ptr<Tilemap>& _pTilemap) :
 	direction(DOWN),
+	ctrl_direction(IDLE),
 	timePerTile(0.7f),
 	offsetTime(0.1f),
 	moveable(true),
-	pTilemap(_pTilemap)
+	pTilemap(_pTilemap),
+	moving(false),
+	rot_only(false)
 {
 	// load whole texture
     if (!texture.loadFromFile(TEXTURES_PATH + tex_path))
@@ -77,10 +80,20 @@ void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const
 	}
 }
 
+void Player::setCtrlDirection(Direction _ctrl_direction, bool _rot_only) {
+	ctrl_direction = _ctrl_direction;
+
+	rot_only = _rot_only;
+}
+
+bool Player::isMoving() {
+	return moving;
+}
+
 
 void Player::moveTile(float delta_t) {
 
-	static bool moving = false, walking = false;
+	static bool walking = false;
 	static Direction prevDirection;
 	static sf::Vector2f startPos;
 	static float time = 0.f;
@@ -93,7 +106,7 @@ void Player::moveTile(float delta_t) {
 
 		startPos = this->getPosition();
 
-		if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { 			// move up
+		if((ctrl_direction == IDLE && sf::Keyboard::isKeyPressed(sf::Keyboard::W)) || ctrl_direction == UP) { 			// move up
 			direction = UP;
 
 			if(prevDirection != direction && !walking) {
@@ -103,11 +116,12 @@ void Player::moveTile(float delta_t) {
 
 				if(inMap(gridPostion.x, gridPostion.y - 1) &&
 						!globals::collision_map[gridPostion.y - 1][gridPostion.x]) {	// check if next field is accessable
-					moving = true;
+
+					if(!rot_only) moving = true;
 				}
 			}
 		}
-		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {		// move left
+		else if((ctrl_direction == IDLE && sf::Keyboard::isKeyPressed(sf::Keyboard::A)) || ctrl_direction == LEFT) {		// move left
 			direction = LEFT;
 
 			if(prevDirection != direction && !walking) {
@@ -117,11 +131,11 @@ void Player::moveTile(float delta_t) {
 
 				if(inMap(gridPostion.x - 1, gridPostion.y) &&
 						!globals::collision_map[gridPostion.y][gridPostion.x - 1]) {	// check if next field is accessable
-					moving = true;
+					if(!rot_only) moving = true;
 				}
 			}
 		}
-		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {		// move down
+		else if((ctrl_direction == IDLE && sf::Keyboard::isKeyPressed(sf::Keyboard::S)) || ctrl_direction == DOWN) {		// move down
 			direction = DOWN;
 
 			if(prevDirection != direction && !walking) {
@@ -131,11 +145,11 @@ void Player::moveTile(float delta_t) {
 
 				if(inMap(gridPostion.x, gridPostion.y + 1) &&
 						!globals::collision_map[gridPostion.y + 1][gridPostion.x]) {	// check if next field is accessable
-					moving = true;
+					if(!rot_only) moving = true;
 				}
 			}
 		}
-		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {		// move right
+		else if((ctrl_direction == IDLE && sf::Keyboard::isKeyPressed(sf::Keyboard::D)) || ctrl_direction == RIGHT) {		// move right
 			direction = RIGHT;
 
 			if(prevDirection != direction && !walking) {
@@ -145,7 +159,7 @@ void Player::moveTile(float delta_t) {
 
 				if(inMap(gridPostion.x + 1, gridPostion.y) &&
 						!globals::collision_map[gridPostion.y][gridPostion.x + 1]) {	// check if next field is accessable
-					moving = true;
+					if(!rot_only) moving = true;
 				}
 			}
 		}
@@ -164,6 +178,7 @@ void Player::moveTile(float delta_t) {
 		if(progress >= 1.f) {	// move completed
 			progress = 1.f;		// set end position fix
 			moving = false;
+			ctrl_direction = IDLE;
 		}
 
 		switch(direction) {

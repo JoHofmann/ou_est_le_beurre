@@ -18,6 +18,9 @@ TestState::TestState(Game *game) : State(game) {
 	}
 
     events[0]->setEnabled(true);	// fridge event
+
+    game->getPlayer()->setCtrlDirection(Direction::UP, true);
+
 }
 
 bool TestState::goalReached() {
@@ -30,7 +33,7 @@ bool TestState::goalReached() {
 
 void TestState::processState() {
     if(!goalReached()){
-//        std::cout << "processing test state" << std::endl;
+
     }
 }
 
