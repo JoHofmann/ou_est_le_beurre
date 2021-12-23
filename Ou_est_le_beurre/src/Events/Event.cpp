@@ -15,5 +15,18 @@ bool Event::getEnabled() {
 	return enabled;
 }
 
+Event::Event() {
+    setEnabled(true);
+    setActive(false);
+}
+
+bool Event::isActive() const {
+    return active;
+}
+
+void Event::setActive(bool active) {
+    Event::active = active;
+}
+
 
 

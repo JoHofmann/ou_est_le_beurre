@@ -6,6 +6,7 @@
 #include "ou_est_le_beurre/StateMachine/TestState.hpp"
 
 #include <iostream>
+#include <utility>
 
 Game::Game()
 {
@@ -39,22 +40,6 @@ Game::Game()
 
     // events
     eventIndex = -1;	// default -> no event will be updated
-
-    pFridgeEvent = std::make_shared<TextboxEvent>(this, L"Muttern", L"Kühlschrank sdgfsdg sgsdfgsfdg sadfgsdfgsdf sfdgsdgsdgf sadfsdfsdf");
-    pEggPanEvent = std::make_shared<TextboxEvent>(this, L"Muttern", L"Schon wieder die dreckige Pfanne (schüttelt den Kopf)");
-
-    events.push_back(pFridgeEvent);
-    events.push_back(pEggPanEvent);
-
-    // tilemap
-    std::vector<sf::Vector2i> eventTiles;
-
-    // TODO add event Tiles in correct order!!!!
-    eventTiles.push_back(sf::Vector2i(2, 2));
-    eventTiles.push_back(sf::Vector2i(2, 3));
-
-
-    pTilemap->setEvents(eventTiles);
 
     // TODO add all states to states vector
     // TODO I really don't know how I can put a child of State into a vector of states
@@ -136,8 +121,20 @@ const int Game::getEventIndex() {
 
 void Game::setEventIndex(int _eventIndex) {
 	eventIndex = _eventIndex;
-	events[eventIndex]->init();
+    // skip uninitialized events
+    if(eventIndex != -1) {
+        events[eventIndex]->init();
+    }
 }
+
+void Game::setEvents(std::vector<std::shared_ptr<Event>> events) {
+    Game::events = std::move(events);
+}
+
+const std::shared_ptr<Tilemap> &Game::getPTilemap() const {
+    return pTilemap;
+}
+
 
 
 

@@ -11,18 +11,23 @@
 class Event {
 
 public:
-
+    Event();
 	virtual void init() = 0;
 	virtual void update(float) = 0;
 
 	virtual void setEnabled(bool);
 	virtual bool getEnabled();
 
+    bool isActive() const;
+
+    void setActive(bool active);
+
 protected:
 
 
 private:
 	bool enabled;
+    bool active;
 
 };
 

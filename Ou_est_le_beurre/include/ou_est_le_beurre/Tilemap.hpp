@@ -29,6 +29,8 @@ public:
     std::vector<std::vector<std::shared_ptr<Tile>>>& getTilemap();
 
     const std::shared_ptr<Tile>& getTile(sf::Vector2i);
+    void resetEvents();
+    void setNewEvents(std::vector<sf::Vector2i> &);
 
 private:
 

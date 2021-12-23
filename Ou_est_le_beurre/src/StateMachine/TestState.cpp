@@ -9,15 +9,17 @@ TestState::TestState(Game *game) : State(game) {
     pTextbox = game->getPTextbox();
     pTextbox->set_enabled(true);
     pTextbox->set_text(std::wstring(L"Test center Innsbruck"), std::wstring(L"Test"));
+    game->getPTilemap()->resetEvents();
+    std::vector<sf::Vector2i> eventTiles;
 
-    events = game->getEvents();
+    std::vector<std::shared_ptr<Event>> events;
+    events.push_back(std::make_shared<TextboxEvent>(game, L"Muttern", L"Test Event"));
+    eventTiles.push_back(sf::Vector2i(2, 2));
+    events.push_back(std::make_shared<TextboxEvent>(game , L"Muttern", L"Schon wieder die dreckige Pfanne (schüttelt den Kopf)"));
+    eventTiles.push_back(sf::Vector2i(2, 3));
 
-    // set all events false
-    for (auto it = events.begin(); it < events.end(); ++it) {
-    	(*it)->setEnabled(false);
-	}
-
-    events[0]->setEnabled(true);	// fridge event
+    game->getPTilemap()->setEvents(eventTiles);
+    game->setEvents(events);
 }
 
 bool TestState::goalReached() {

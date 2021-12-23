@@ -27,11 +27,26 @@ Tilemap::~Tilemap() {
 	// TODO Auto-generated destructor stub
 }
 
+void Tilemap::setNewEvents(std::vector<sf::Vector2i> &eventTiles) {
+    // first delete all events
+    resetEvents();
+    // then register new events
+    setEvents(eventTiles);
+}
+
 void Tilemap::setEvents(std::vector<sf::Vector2i> &eventTiles) {
 	// add events to tiles
 	for (int i = 0; i < eventTiles.size(); i++) {
 		tilemap[eventTiles[i].y][eventTiles[i].x]->setEventIndex(i);
 	}
+}
+
+void Tilemap::resetEvents(){
+    for(int i = 0; i < globals::YTILECOUNT; i++){
+        for(int k = 0; k < globals::XTILECOUNT; k++){
+            tilemap[i][k]->setEventIndex(-1);
+        }
+    }
 }
 
 void Tilemap::update(float) {

@@ -38,8 +38,13 @@ public:
 
     std::vector<std::shared_ptr<Event>> &getEvents();
 
+    void setEvents(std::vector<std::shared_ptr<Event>> events);
+
     const int getEventIndex();
     void setEventIndex(int);
+
+    const std::shared_ptr<Tilemap> &getPTilemap() const;
+
 
 private:
 
@@ -69,8 +74,6 @@ private:
 
     // events
     int eventIndex;
-    std::shared_ptr<TextboxEvent> pEggPanEvent;
-    std::shared_ptr<TextboxEvent> pFridgeEvent;
 
     std::vector<std::shared_ptr<Event>> events;
 };
