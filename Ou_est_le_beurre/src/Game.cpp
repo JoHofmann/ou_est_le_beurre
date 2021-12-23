@@ -40,7 +40,7 @@ Game::Game()
     // events
     eventIndex = -1;	// default -> no event will be updated
 
-    pFridgeEvent = std::make_shared<TextboxEvent>(this, L"Muttern", L"Kühlschrank");
+    pFridgeEvent = std::make_shared<TextboxEvent>(this, L"Muttern", L"Kühlschrank sdgfsdg sgsdfgsfdg sadfgsdfgsdf sfdgsdgsdgf sadfsdfsdf");
     pEggPanEvent = std::make_shared<TextboxEvent>(this, L"Muttern", L"Schon wieder die dreckige Pfanne (schüttelt den Kopf)");
 
     events.push_back(pFridgeEvent);
@@ -58,10 +58,10 @@ Game::Game()
 
     // TODO add all states to states vector
     // TODO I really don't know how I can put a child of State into a vector of states
-    std::shared_ptr<OpeningState> pOpeningState = std::make_shared<OpeningState>(this);
-    states.push_back(pOpeningState);
-    //std::shared_ptr<TestState> pTestState = std::make_shared<TestState>(this);
-    //states.push_back(pTestState);
+//    std::shared_ptr<OpeningState> pOpeningState = std::make_shared<OpeningState>(this);
+//    states.push_back(pOpeningState);
+   std::shared_ptr<TestState> pTestState = std::make_shared<TestState>(this);
+   states.push_back(pTestState);
     // TODO start iterator
     stateIterator = states.begin();
 }

@@ -17,6 +17,7 @@ private:
     void processState() override;
 
     std::shared_ptr<Textbox> pTextbox;
+    std::vector<std::shared_ptr<Event>> events;
 };
 
 

@@ -19,14 +19,14 @@ OpeningState::OpeningState(Game *game) : State(game) {
     pPlayer->setGridPosition(sf::Vector2i(3, 0));
     pPlayer->setMoveable(true);
 
-    // TODO set all events true
+    // TODO set all events true/false
     events[0]->setEnabled(true);	// fridge event
 }
 
 bool OpeningState::goalReached() {
-//    if(state == FINISHED){
-//        return true;
-//    }
+    if(state == FINISHED){
+        return true;
+    }
     return false;
 }
 
