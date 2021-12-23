@@ -27,7 +27,7 @@ Game::Game()
 
     pTilemap = std::make_shared<Tilemap>(this);
 
-    pPlayer = std::make_shared<Player>("Momy.png", pTilemap);
+    pPlayer = std::make_shared<Player>("Muttern.png", pTilemap);
     pTextbox = std::make_shared<Textbox>("Simple_Textbox.png");
     pFade = std::make_shared<FadeObject>();
 

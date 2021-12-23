@@ -9,10 +9,11 @@
 #include "ou_est_le_beurre/Tilemap.hpp"
 
 #include <iostream>
+#include <cmath>
 
 Player::Player(const std::string &tex_path, std::shared_ptr<Tilemap>& _pTilemap) :
 	direction(DOWN),
-	timePerTile(0.25f),
+	timePerTile(0.7f),
 	offsetTime(0.1f),
 	moveable(true),
 	pTilemap(_pTilemap)
@@ -25,7 +26,7 @@ Player::Player(const std::string &tex_path, std::shared_ptr<Tilemap>& _pTilemap)
 
     // set players texture as first sprite
 	sprite.setTexture(texture);
-	sprite.setTextureRect(sf::IntRect(0, 0, globals::TILESIZE, globals::TILESIZE));
+	sprite.setTextureRect(sf::IntRect(3*direction, 0, globals::TILESIZE, globals::TILESIZE));
 
 //	shape = sprite.getGlobalBounds();
 
@@ -95,8 +96,6 @@ void Player::moveTile(float delta_t) {
 		if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) { 			// move up
 			direction = UP;
 
-			sprite.setTextureRect(sf::IntRect(0, 0, globals::TILESIZE, globals::TILESIZE));
-
 			if(prevDirection != direction && !walking) {
 				time = 0.f;
 			}else if(time >= offsetTime) {
@@ -110,8 +109,6 @@ void Player::moveTile(float delta_t) {
 		}
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {		// move left
 			direction = LEFT;
-
-			sprite.setTextureRect(sf::IntRect(3*globals::TILESIZE, 0, globals::TILESIZE, globals::TILESIZE));
 
 			if(prevDirection != direction && !walking) {
 				time = 0.f;
@@ -127,8 +124,6 @@ void Player::moveTile(float delta_t) {
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {		// move down
 			direction = DOWN;
 
-			sprite.setTextureRect(sf::IntRect(2*globals::TILESIZE, 0, globals::TILESIZE, globals::TILESIZE));
-
 			if(prevDirection != direction && !walking) {
 				time = 0.f;
 			}else if(time >= offsetTime) {
@@ -143,8 +138,6 @@ void Player::moveTile(float delta_t) {
 		else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {		// move right
 			direction = RIGHT;
 
-			sprite.setTextureRect(sf::IntRect(globals::TILESIZE, 0, globals::TILESIZE, globals::TILESIZE));
-
 			if(prevDirection != direction && !walking) {
 				time = 0.f;
 			}else if(time >= offsetTime) {
@@ -156,6 +149,7 @@ void Player::moveTile(float delta_t) {
 				}
 			}
 		}
+        sprite.setTextureRect(sf::IntRect(globals::TILESIZE * (3*direction), 0, globals::TILESIZE, globals::TILESIZE));
 
 		prevDirection = direction;
 		walking = false;
@@ -165,6 +159,7 @@ void Player::moveTile(float delta_t) {
 		walking = true;
 
 		float progress = time / timePerTile;	// progress [0 - 1]
+        setWalkingAnimation(progress);
 
 		if(progress >= 1.f) {	// move completed
 			progress = 1.f;		// set end position fix
@@ -190,6 +185,24 @@ void Player::moveTile(float delta_t) {
 			break;
 		}
 	}
+}
+
+void Player::setWalkingAnimation(float progress){
+    if(direction == UP || direction == DOWN){
+        if(progress < 0.5f){
+            sprite.setTextureRect(sf::IntRect(globals::TILESIZE * (3*direction + 1), 0, globals::TILESIZE, globals::TILESIZE));
+        }else if(progress < 1.0f){
+            sprite.setTextureRect(sf::IntRect(globals::TILESIZE * (3*direction + 2), 0, globals::TILESIZE, globals::TILESIZE));
+        }
+    }else{
+        if(progress < 0.33f){
+            sprite.setTextureRect(sf::IntRect(globals::TILESIZE * (3*direction + 1), 0, globals::TILESIZE, globals::TILESIZE));
+        }else if(progress < 0.66f){
+            sprite.setTextureRect(sf::IntRect(globals::TILESIZE * (3*direction), 0, globals::TILESIZE, globals::TILESIZE));
+        }else if(progress < 1.0f){
+            sprite.setTextureRect(sf::IntRect(globals::TILESIZE * (3*direction + 2), 0, globals::TILESIZE, globals::TILESIZE));
+        }
+    }
 }
 
 // check if pos(x, y) is in map

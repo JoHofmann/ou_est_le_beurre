@@ -10,13 +10,14 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
+#include <iostream>
 #include <memory>
 #include "ou_est_le_beurre/globals.hpp"
 #include "ou_est_le_beurre/GameObject.hpp"
 
 class Tilemap;
 
-enum Direction { UP, LEFT, DOWN, RIGHT };
+enum Direction { DOWN, RIGHT, LEFT, UP };
 
 class Player : public GameObject
 {
@@ -51,8 +52,10 @@ private:
 	const float timePerTile;	// in seconds
 	const float offsetTime;		// time to wait between rotating and moving
 
+
 	bool moveable;
 
+    void setWalkingAnimation(float);
 	std::shared_ptr<Tilemap> pTilemap;
 };
 
