@@ -15,11 +15,12 @@
 #include "ou_est_le_beurre/Textbox.hpp"
 #include "ou_est_le_beurre/globals.hpp"
 
+class Game;
 
 class Tile : public GameObject{
 public:
 
-	Tile(int* _indexPointer, int, bool);
+	Tile(Game *, int, bool);
 
 	void setWalkable(bool);
 	bool getWalkable();
@@ -37,7 +38,7 @@ private:
 	bool walkable;
 
 	int eventIndex;
-	int *indexPointer;
+	Game *game;
 };
 
 

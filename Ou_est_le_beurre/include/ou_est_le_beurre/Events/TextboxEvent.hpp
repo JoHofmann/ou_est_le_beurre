@@ -16,6 +16,7 @@ class TextboxEvent : public Event {
 public:
 	TextboxEvent(std::wstring, std::wstring);
 
+	void init();
 	void update(float) override;
 
 private:

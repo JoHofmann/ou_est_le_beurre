@@ -7,8 +7,7 @@
 
 #include <iostream>
 
-Game::Game() :
-	tilemap(&eventIndex)
+Game::Game()
 {
     // Background Music
     // load something into the sound buffer...
@@ -26,7 +25,9 @@ Game::Game() :
     }
     background.setTexture(tex_background);
 
-    pPlayer = std::make_shared<Player>("Momy.png", &tilemap);
+    pTilemap = std::make_shared<Tilemap>(this);
+
+    pPlayer = std::make_shared<Player>("Momy.png", pTilemap);
     pTextbox = std::make_shared<Textbox>("Simple_Textbox.png");
     pFade = std::make_shared<FadeObject>();
 
@@ -53,7 +54,7 @@ Game::Game() :
     eventTiles.push_back(sf::Vector2i(2, 3));
 
 
-    tilemap.setEvents(eventTiles);
+    pTilemap->setEvents(eventTiles);
 
     // TODO add all states to states vector
     // TODO I really don't know how I can put a child of State into a vector of states
@@ -85,7 +86,7 @@ void Game::update(float delta_t)
     if(eventIndex != -1) {
     	events[eventIndex]->update(delta_t);
     }
-//	std::cout << eventIndex << std::endl;
+	std::cout << eventIndex << std::endl;
 
 
     // TODO update all game objects general
@@ -100,22 +101,6 @@ void Game::draw(sf::RenderWindow &window)
     window.clear(sf::Color::White);
 
     window.draw(background);
-
-
-//    // draw collision map (for testing)
-//    for (int y = 0; y < globals::YTILECOUNT; ++y) {
-//    	for (int x = 0; x < globals::XTILECOUNT; ++x) {
-//
-//    		if(globals::collision_map[y][x]) {
-//
-//        		sf::RectangleShape rect(sf::Vector2f(globals::TILESIZE, globals::TILESIZE));
-//        		rect.setPosition(x * globals::TILESIZE, y * globals::TILESIZE);
-//    			rect.setFillColor(sf::Color::Black);
-//
-//    			window.draw(rect);
-//    		}
-//    	}
-//	}
 
     // draw gameObjects
     for (auto it = gameObjects.begin(); it != gameObjects.end(); ++it) {
@@ -152,6 +137,7 @@ const int Game::getEventIndex() {
 
 void Game::setEventIndex(int _eventIndex) {
 	eventIndex = _eventIndex;
+	events[eventIndex]->init();
 }
 
 

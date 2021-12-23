@@ -6,8 +6,9 @@
  */
 
 #include "ou_est_le_beurre/Tilemap.hpp"
+#include "ou_est_le_beurre/Game.hpp"
 
-Tilemap::Tilemap(int* indexPointer) {
+Tilemap::Tilemap(Game *game) {
 
 	// init tilemap as default
 	for (int y = 0; y < globals::YTILECOUNT; ++y) {
@@ -15,7 +16,7 @@ Tilemap::Tilemap(int* indexPointer) {
 		std::vector<std::shared_ptr<Tile>> tmp_vec;
 
 		for (int x = 0; x < globals::XTILECOUNT; ++x) {
-			tmp_vec.push_back(std::make_shared<Tile>(indexPointer, -1, globals::collision_map[y][x]));
+			tmp_vec.push_back(std::make_shared<Tile>(game, -1, globals::collision_map[y][x]));
 		}
 
 		tilemap.push_back(tmp_vec);
