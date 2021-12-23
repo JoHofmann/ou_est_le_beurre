@@ -4,6 +4,7 @@
 
 #include "ou_est_le_beurre/Game.hpp"
 #include "ou_est_le_beurre/StateMachine/TestState.hpp"
+#include "ou_est_le_beurre/StateMachine/ExploringState.hpp"
 
 #include <iostream>
 #include <utility>
@@ -42,13 +43,14 @@ Game::Game()
     eventIndex = -1;	// default -> no event will be updated
 
     // TODO add all states to states vector
-    // TODO I really don't know how I can put a child of State into a vector of states
-//    std::shared_ptr<OpeningState> pOpeningState = std::make_shared<OpeningState>(this);
-//    states.push_back(pOpeningState);
-   std::shared_ptr<TestState> pTestState = std::make_shared<TestState>(this);
-   states.push_back(pTestState);
-    // TODO start iterator
+   states.push_back(std::make_shared<OpeningState>(this));
+   states.push_back(std::make_shared<ExploringState>(this));
+   //std::shared_ptr<TestState> pTestState = std::make_shared<TestState>(this);
+   //states.push_back(pTestState);
+
+    // start iterator
     stateIterator = states.begin();
+    (*stateIterator)->initState();
 }
 
 void Game::updateStateMachine(float delta_t){
@@ -58,6 +60,7 @@ void Game::updateStateMachine(float delta_t){
             std::cout << "Game is over" << std::endl;
         }else{
             stateIterator = next(stateIterator);
+            (*stateIterator)->initState();
         }
     }
     (*stateIterator)->update(delta_t);

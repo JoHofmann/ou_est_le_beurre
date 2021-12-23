@@ -17,6 +17,8 @@ public:
 
     void update(float);
     virtual bool goalReached()=0;
+    // This function is called just before the state gets active
+    virtual void initState()=0;
 
     // *** Getter and Setter ***
     float getElapsedTime() const;

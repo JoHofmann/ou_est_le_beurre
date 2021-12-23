@@ -13,6 +13,7 @@ public:
     TestState(Game *);
 
     bool goalReached() override;
+    void initState() override;
 private:
     void processState() override;
 

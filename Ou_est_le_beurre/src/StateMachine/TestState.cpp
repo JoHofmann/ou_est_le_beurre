@@ -9,7 +9,6 @@ TestState::TestState(Game *game) : State(game) {
     pTextbox = game->getPTextbox();
     pTextbox->set_enabled(true);
     pTextbox->set_text(std::wstring(L"Test center Innsbruck"), std::wstring(L"Test"));
-    game->getPTilemap()->resetEvents();
     std::vector<sf::Vector2i> eventTiles;
 
     std::vector<std::shared_ptr<Event>> events;
@@ -18,9 +17,9 @@ TestState::TestState(Game *game) : State(game) {
     events.push_back(std::make_shared<TextboxEvent>(game , L"Muttern", L"Schon wieder die dreckige Pfanne (schüttelt den Kopf)"));
     eventTiles.push_back(sf::Vector2i(2, 3));
 
-    game->getPTilemap()->setEvents(eventTiles);
+    game->getPTilemap()->setNewEvents(eventTiles);
     game->setEvents(events);
-    //game->getPlayer()->setCtrlDirection(Direction::UP, true);
+    game->getPlayer()->setCtrlDirection(Direction::UP, false);
 
 }
 
@@ -36,5 +35,9 @@ void TestState::processState() {
     if(!goalReached()){
 
     }
+}
+
+void TestState::initState() {
+
 }
 

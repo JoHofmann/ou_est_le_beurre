@@ -9,18 +9,7 @@ OpeningState::OpeningState(Game *game) : State(game) {
     pTextbox = game->getPTextbox();
     pFade = game->getPFade();
     pPlayer = game->getPlayer();
-
-    events = game->getEvents();
-
-    // TODO initialize scene
-    pTextbox->set_enabled(false);
-    pFade->startFade();
-    // TODO momy at door
-    pPlayer->setGridPosition(sf::Vector2i(3, 0));
-    pPlayer->setMoveable(true);
-
-    // TODO set all events true/false
-    events[0]->setEnabled(true);	// fridge event
+    desired_event_is_active = false;
 }
 
 bool OpeningState::goalReached() {
@@ -49,9 +38,36 @@ void OpeningState::processState() {
             }
             break;
         case EPILOG:
-            if(!pTextbox->get_enabled()){
+            if(!pTextbox->isTextIsFinished()){
+                state = FRIDGE;
+            }
+            break;
+        case FRIDGE:
+            if(game->getEvents()[0]->isActive() && !desired_event_is_active){
+                desired_event_is_active = true;
+            } else if(!game->getEvents()[0]->isActive() && desired_event_is_active){
+                desired_event_is_active = false;
                 state = FINISHED;
             }
             break;
     }
+}
+
+void OpeningState::initState() {
+    // TODO initialize scene
+    pTextbox->set_enabled(false);
+    pFade->startFade();
+    // Muttern at door
+    pPlayer->setGridPosition(sf::Vector2i(3, 0));
+    pPlayer->setMoveable(true);
+
+    // init events
+    std::vector<sf::Vector2i> eventTiles;
+
+    std::vector<std::shared_ptr<Event>> events;
+    events.push_back(std::make_shared<TextboxEvent>(game, L"Muttern", L"Kühlschrank"));
+    eventTiles.push_back(sf::Vector2i(5, 0));
+
+    game->getPTilemap()->setNewEvents(eventTiles);
+    game->setEvents(events);
 }

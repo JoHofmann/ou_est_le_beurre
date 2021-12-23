@@ -15,6 +15,7 @@ add_library(ouEstLeBeurreLib
         StateMachine/State.cpp
         StateMachine/TestState.cpp
         StateMachine/OpeningState.cpp
+        StateMachine/ExploringState.cpp
         Events/Event.cpp
         Events/TextboxEvent.cpp
         ${HEADER_LIST})
