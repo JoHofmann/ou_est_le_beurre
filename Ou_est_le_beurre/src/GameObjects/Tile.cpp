@@ -6,14 +6,15 @@
  */
 
 #include "ou_est_le_beurre/Tile.hpp"
+#include "ou_est_le_beurre/Game.hpp"
 
 #include <iostream>
 
 // if no event eventIndex should be -1!
-Tile::Tile(int *_indexPointer, int _eventIndex, bool _walkable) :
+Tile::Tile(Game *game, int _eventIndex, bool _walkable) :
 	eventIndex(_eventIndex),
 	walkable(_walkable),
-	indexPointer(_indexPointer)
+	game(game)
 {
 	this->set_enabled(true);
 }
@@ -31,8 +32,8 @@ void Tile::setEventIndex(int _eventIndex) {
 }
 
 void Tile::triggerd() {
-	if((eventIndex != -1) && enabled) {
-		*indexPointer = eventIndex;
+	if(enabled) {
+		game->setEventIndex(eventIndex);
 	}
 }
 

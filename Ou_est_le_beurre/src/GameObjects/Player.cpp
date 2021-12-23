@@ -6,11 +6,12 @@
  */
 
 #include "ou_est_le_beurre/Player.hpp"
+#include "ou_est_le_beurre/Tilemap.hpp"
 
 #include <iostream>
 #include <cmath>
 
-Player::Player(const std::string &tex_path, Tilemap* _pTilemap) :
+Player::Player(const std::string &tex_path, std::shared_ptr<Tilemap>& _pTilemap) :
 	direction(DOWN),
 	timePerTile(0.7f),
 	offsetTime(0.1f),

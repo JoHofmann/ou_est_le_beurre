@@ -14,10 +14,11 @@
 #include "ou_est_le_beurre/GameObject.hpp"
 #include "ou_est_le_beurre/Tile.hpp"
 
+class Game;
 
 class Tilemap : public GameObject{
 public:
-	Tilemap(int*);
+	Tilemap(Game *);
 	~Tilemap();
 
 	void setEvents(std::vector<sf::Vector2i> &);

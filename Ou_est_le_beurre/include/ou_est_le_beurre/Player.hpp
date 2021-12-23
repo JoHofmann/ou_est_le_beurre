@@ -11,16 +11,18 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <iostream>
+#include <memory>
 #include "ou_est_le_beurre/globals.hpp"
 #include "ou_est_le_beurre/GameObject.hpp"
-#include "ou_est_le_beurre/Tilemap.hpp"
+
+class Tilemap;
 
 enum Direction { DOWN, RIGHT, LEFT, UP };
 
 class Player : public GameObject
 {
 public:
-	Player(const std::string &, Tilemap *);
+	Player(const std::string &, std::shared_ptr<Tilemap>&);
 	~Player();
 
     void update(float) override;
@@ -53,9 +55,8 @@ private:
 
 	bool moveable;
 
-	Tilemap *pTilemap;
-
     void setWalkingAnimation(float);
+	std::shared_ptr<Tilemap> pTilemap;
 };
 
 #endif

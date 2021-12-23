@@ -12,6 +12,7 @@ class Event {
 
 public:
 
+	virtual void init() = 0;
 	virtual void update(float) = 0;
 
 	virtual void setEnabled(bool);

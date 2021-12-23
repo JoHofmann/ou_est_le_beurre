@@ -20,7 +20,7 @@
 #include "ou_est_le_beurre/StateMachine/OpeningState.hpp"
 #include "ou_est_le_beurre/Tilemap.hpp"
 
-
+class Tilemap;
 
 class Game {
 public:
@@ -65,7 +65,7 @@ private:
     sf::Sound backgroundMusic;
 
     // tilemap
-    Tilemap tilemap;
+    std::shared_ptr<Tilemap> pTilemap;
 
     // events
     int eventIndex;

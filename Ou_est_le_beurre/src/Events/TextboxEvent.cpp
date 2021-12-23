@@ -18,19 +18,17 @@ TextboxEvent::TextboxEvent(std::wstring tb_name, std::wstring tb_text) :
 	textbox.set_text(tb_name, tb_text);
 }
 
+void TextboxEvent::init() {
+	textbox.set_enabled(true);
+
+	std::cout << "Textbox event started" << std::endl;
+}
+
 void TextboxEvent::update(float delta_t) {
 
 	if(this->getEnabled()) {
-		if(!textbox.get_enabled()){
-			textbox.set_enabled(true);
+		if(textbox.isTextIsFinished()) {
+			this->setEnabled(false);
 		}
-
-		std::cout << "TextboxEvent update update" << std::endl;
-
-		// TODO wann textbox fertig??????
-	}
-
-	if(!textbox.get_enabled()) {
-		this->setEnabled(false);
 	}
 }
