@@ -26,7 +26,7 @@ Game::Game() :
     }
     background.setTexture(tex_background);
 
-    pPlayer = std::make_shared<Player>("Momy.png", &tilemap);
+    pPlayer = std::make_shared<Player>("Muttern.png", &tilemap);
     pTextbox = std::make_shared<Textbox>("Simple_Textbox.png");
     pFade = std::make_shared<FadeObject>();
 
