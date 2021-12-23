@@ -8,7 +8,7 @@
 TestState::TestState(Game *game) : State(game) {
     pTextbox = game->getPTextbox();
     pTextbox->set_enabled(true);
-    pTextbox->set_text(std::wstring(L"Test center Innsbruck"), std::wstring(L"Test state."));
+    pTextbox->set_text(std::wstring(L"Test center Innsbruck"), std::wstring(L"Test"));
 
     events = game->getEvents();
 

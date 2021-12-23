@@ -55,7 +55,7 @@ private:
     int arrow_motion_counter;
     bool arrow_up;
     sf::Vector2f arrow_motion_direction;
-    bool text_is_finished;
+    bool text_is_finished = false;
 public:
     bool isTextIsFinished() const;
 
