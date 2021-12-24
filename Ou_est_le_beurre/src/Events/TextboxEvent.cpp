@@ -17,12 +17,10 @@ TextboxEvent::TextboxEvent(Game *game, std::wstring tb_name, std::wstring tb_tex
 }
 
 void TextboxEvent::init() {
-	if(textbox->isTextIsFinished()) {
-		textbox->set_text(textbox_name, textbox_text);
-		textbox->set_enabled(true);
+    textbox->set_text(textbox_name, textbox_text);
+	textbox->set_enabled(true);
 
-        this->setActive(true);
-	}
+    this->setActive(true);
 }
 
 void TextboxEvent::update(float delta_t) {

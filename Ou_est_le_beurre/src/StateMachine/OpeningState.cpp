@@ -29,16 +29,33 @@ void OpeningState::prepareEpilog(){
     pTextbox->set_enabled(true);
 }
 
+void OpeningState::prepareHust(){
+    pTextbox->set_text(L"Muttern",
+                       L"hust hust\n"
+                       "Hust Hust hust Hust\n\n"
+                       "Hust Hust Hust hust Hust hust\n"
+                       "HUST HUST HUST hust HUST HUST hust\n"
+                       "HUST hust hust");
+
+    pTextbox->set_enabled(true);
+}
+
 void OpeningState::processState() {
     switch(state){
         case FADE_IN:
             if(!pFade->get_enabled()){
+                prepareHust();
+                state = HUST;
+            }
+            break;
+        case HUST:
+            if(pTextbox->isTextIsFinished()){
                 prepareEpilog();
                 state = EPILOG;
             }
             break;
         case EPILOG:
-            if(!pTextbox->isTextIsFinished()){
+            if(pTextbox->isTextIsFinished()){
                 state = FRIDGE;
             }
             break;
@@ -67,7 +84,10 @@ void OpeningState::initState() {
     std::vector<sf::Vector2i> eventTiles;
 
     std::vector<std::shared_ptr<Event>> events;
-    events.push_back(std::make_shared<TextboxEvent>(game, L"Muttern", L"Kühlschrank"));
+    events.push_back(std::make_shared<TextboxEvent>(game, L"Muttern", L"Eier, Mehl, Milch, ...\n"
+                                                                      "Aber was ist das ...\n"
+                                                                      "OU EST LE BEURRE??\n"
+                                                                      "Hier auf jeden Fall nicht. Aber sie muss doch irgendwo hier in der Küche sein. Ich glaub ich muss sie suchen."));
     eventTiles.push_back(sf::Vector2i(5, 0));
 
     game->getPTilemap()->setNewEvents(eventTiles);
