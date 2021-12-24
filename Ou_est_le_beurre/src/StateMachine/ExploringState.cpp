@@ -20,8 +20,8 @@ void ExploringState::processState() {
 void ExploringState::initState() {
     // init events
     std::vector<sf::Vector2i> eventTiles;
-
     std::vector<std::pair<std::wstring, std::wstring>> dialog;
+
 
     std::vector<std::shared_ptr<Event>> events;
 
@@ -51,7 +51,10 @@ void ExploringState::initState() {
 
 
     // 2
-    events.push_back(std::make_shared<TextboxEvent>(game, L"Muttern", L"Ach Christoph, ich hab übrigens alle Kontakte aus dem Telefon gelöscht."));
+    dialog.empty();
+    dialog.push_back(std::make_pair(L"Muttern", L"Ach Christoph, ich hab übrigens alle Kontakte aus dem Telefon gelöscht."));
+    dialog.push_back(std::make_pair(L"Vatern", L"Dir brennt wohl der Kittel! Und für 60 Euro im Ausland telefoniert…"));
+    events.push_back(std::make_shared<TextboxEvent>(game, dialog));
     eventTiles.push_back(sf::Vector2i(2, 1));
 
     events.push_back(std::make_shared<TextboxEvent>(game, L"Vatern", L"Ach des isch en Rettich! I hon denkt des sind roate Riabe!"));
@@ -71,6 +74,12 @@ void ExploringState::initState() {
     events.push_back(std::make_shared<TextboxEvent>(game, L"Muttern", L"Unterm Salem-Aktuell isch DER Butter au it."));
     eventTiles.push_back(sf::Vector2i(4, 4));
 
+    dialog.empty();
+    dialog.push_back(std::make_pair(L"Vatern", L"Will jemand einen Ekschpresso?"));
+    dialog.push_back(std::make_pair(L"Muttern", L"Nein, aber bitte einen kleinen Cappuccino"));
+    events.push_back(std::make_shared<TextboxEvent>(game, dialog));
+    eventTiles.push_back(sf::Vector2i(4, 5));
+
     // 5
     events.push_back(std::make_shared<TextboxEvent>(game, L"Muttern", L"Nein. Hier ist die Butter bestimmt nicht...\nAber den Kühlschrank könnte man mal wider putzen. Am besten an Heilig Abend. Da haben bestimmt alle richtig viel Zeit. KINDER, kommet mal bitte ..."));
     eventTiles.push_back(sf::Vector2i(5, 0));
@@ -79,16 +88,9 @@ void ExploringState::initState() {
     eventTiles.push_back(sf::Vector2i(5, 5));
 
     // 6
- //   events.push_back(std::make_shared<TextboxEvent>(game, L"Muttern", L"Die drecks Glaskaraffe passt nicht mal ins Rondell!"));
- //   eventTiles.push_back(sf::Vector2i(6, 0));
+     events.push_back(std::make_shared<TextboxEvent>(game, L"Muttern", L"Die drecks Glaskaraffe passt nicht mal ins Rondell!"));
+     eventTiles.push_back(sf::Vector2i(6, 0));
 
-
-    dialog.push_back(std::make_pair(L"Muttern", L"hafhoiashdff"));
-    dialog.push_back(std::make_pair(L"Vatern", L"testtedt"));
-
-
-    events.push_back(std::make_shared<TextboxEvent>(game, dialog));
-    eventTiles.push_back(sf::Vector2i(6, 0));
 
     events.push_back(std::make_shared<ChauAmoreEvent>(game));
     eventTiles.push_back(sf::Vector2i(6,5));

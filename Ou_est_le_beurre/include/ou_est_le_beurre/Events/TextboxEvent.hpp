@@ -33,6 +33,8 @@ private:
 	std::vector<std::pair<std::wstring, std::wstring>> messages;
 	std::vector<std::pair<std::wstring, std::wstring>>::iterator messages_iter;
 
+    int idx;
+
 	Game *game;
 };
 

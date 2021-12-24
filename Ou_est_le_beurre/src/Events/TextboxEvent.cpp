@@ -9,6 +9,7 @@
 #include "ou_est_le_beurre/Game.hpp"
 
 #include <iostream>
+#include <utility>
 
 TextboxEvent::TextboxEvent(Game *game, std::wstring tb_name, std::wstring tb_text) :
 	Event(), game(game)
@@ -24,18 +25,15 @@ TextboxEvent::TextboxEvent(Game *game, std::vector<std::pair<std::wstring, std::
 {
 	textbox = game->getPTextbox();
 
-	messages = dialog;
-
-	messages_iter = messages.begin();
+	messages = std::move(dialog);
 }
 
 
 void TextboxEvent::init() {
-
-	if(textbox->isTextIsFinished()) {
-		textbox->set_text(messages_iter->first, messages_iter->second);
-		textbox->set_enabled(true);
-	}
+    messages_iter = messages.begin();
+    textbox->set_text(messages[0].first, messages[0].second);
+    textbox->set_enabled(true);
+    idx = 1;
     this->setActive(true);
 }
 
@@ -43,10 +41,11 @@ void TextboxEvent::update(float delta_t) {
 	if(this->isActive()) {
 		if(textbox->isTextIsFinished()) {
 
-			if(messages_iter != messages.end()) {
-				textbox->set_text(messages_iter->first, messages_iter->second);
+			if(idx < messages.size()) {
+				textbox->set_text(messages[idx].first, messages[idx].second);
+                textbox->set_enabled(true);
+                idx++;
 
-				messages_iter = next(messages_iter);
 			}else{
 				std::cout << "Textbox event finished" << std::endl;
 
