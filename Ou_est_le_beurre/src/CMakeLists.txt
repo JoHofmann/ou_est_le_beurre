@@ -18,6 +18,7 @@ add_library(ouEstLeBeurreLib
         StateMachine/ExploringState.cpp
         Events/Event.cpp
         Events/TextboxEvent.cpp
+        Events/ChauAmoreEvent.cpp
         ${HEADER_LIST})
 
 # We need this directory, and users of our library will need it too

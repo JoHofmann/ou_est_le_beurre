@@ -43,6 +43,7 @@ void OpeningState::processState() {
             }
             break;
         case FRIDGE:
+            pPlayer->setMoveable(true);
             if(game->getEvents()[0]->isActive() && !desired_event_is_active){
                 desired_event_is_active = true;
             } else if(!game->getEvents()[0]->isActive() && desired_event_is_active){
@@ -59,7 +60,8 @@ void OpeningState::initState() {
     pFade->startFade();
     // Muttern at door
     pPlayer->setGridPosition(sf::Vector2i(3, 0));
-    pPlayer->setMoveable(true);
+    pPlayer->setMoveable(false);
+
 
     // init events
     std::vector<sf::Vector2i> eventTiles;

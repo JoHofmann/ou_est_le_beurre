@@ -7,6 +7,7 @@
 
 #include "ou_est_le_beurre/StateMachine/State.hpp"
 #include "ou_est_le_beurre/Game.hpp"
+#include "ou_est_le_beurre/Events/ChauAmoreEvent.hpp"
 
 class ExploringState : public State{
 public:

@@ -32,18 +32,21 @@ Game::Game()
     pPlayer = std::make_shared<Player>("Muttern.png", pTilemap);
     pTextbox = std::make_shared<Textbox>("Simple_Textbox.png");
     pFade = std::make_shared<FadeObject>();
+    pPapo = std::make_shared<Player>("Papo.png", pTilemap);
+    pPapo->set_enabled(false);
 
     pPlayer->set_enabled(true);
 
     gameObjects.push_back(pPlayer);
     gameObjects.push_back(pTextbox);
     gameObjects.push_back(pFade);
+    gameObjects.push_back(pPapo);
 
     // events
     eventIndex = -1;	// default -> no event will be updated
 
     // TODO add all states to states vector
-   states.push_back(std::make_shared<OpeningState>(this));
+   //states.push_back(std::make_shared<OpeningState>(this));
    states.push_back(std::make_shared<ExploringState>(this));
    //std::shared_ptr<TestState> pTestState = std::make_shared<TestState>(this);
    //states.push_back(pTestState);
@@ -136,6 +139,10 @@ void Game::setEvents(std::vector<std::shared_ptr<Event>> events) {
 
 const std::shared_ptr<Tilemap> &Game::getPTilemap() const {
     return pTilemap;
+}
+
+const std::shared_ptr<Player> &Game::getPPapo() const {
+    return pPapo;
 }
 
 

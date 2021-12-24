@@ -45,6 +45,8 @@ public:
 
     const std::shared_ptr<Tilemap> &getPTilemap() const;
 
+    const std::shared_ptr<Player> &getPPapo() const;
+
 
 private:
 
@@ -57,6 +59,7 @@ private:
     std::shared_ptr<Player> pPlayer;
     std::shared_ptr<Textbox> pTextbox;
     std::shared_ptr<FadeObject> pFade;
+    std::shared_ptr<Player> pPapo;
 
     // GameObject Vector
     std::vector<std::shared_ptr<GameObject>> gameObjects;
