@@ -46,6 +46,9 @@ public:
 
     const std::shared_ptr<Player> &getPPapo() const;
 
+    bool isKeyReleased(sf::Keyboard::Key);
+
+    void setKeyReleased(sf::Keyboard::Key);
 
 private:
 
@@ -75,6 +78,9 @@ private:
     std::shared_ptr<Tilemap> pTilemap;
 
     std::vector<std::shared_ptr<Event>> events;
+
+    // releasd keyboard inpuz
+    sf::Keyboard::Key releasedKey;
 };
 
 

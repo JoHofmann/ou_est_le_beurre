@@ -29,7 +29,7 @@ Game::Game()
 
     pTilemap = std::make_shared<Tilemap>(this);
 
-    pPlayer = std::make_shared<Player>("Muttern.png", pTilemap);
+    pPlayer = std::make_shared<Player>(this, "Muttern.png");
     pTextbox = std::make_shared<Textbox>("Simple_Textbox.png");
     pFade = std::make_shared<FadeObject>();
     pPapo = std::make_shared<Player>("Papo.png", pTilemap);
@@ -137,6 +137,10 @@ const std::shared_ptr<Player> &Game::getPPapo() const {
     return pPapo;
 }
 
+bool Game::isKeyReleased(sf::Keyboard::Key key) {
+	return key == releasedKey;
+}
 
-
-
+void Game::setKeyReleased(sf::Keyboard::Key key) {
+	releasedKey = key;
+}

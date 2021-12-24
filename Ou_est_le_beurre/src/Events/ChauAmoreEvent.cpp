@@ -55,7 +55,7 @@ void ChauAmoreEvent::init() {
     pPapo->set_enabled(true);
     pTextbox->set_text(L"Vatern", L"Ciao d'Amore. Es tut so weh...");
     pTextbox->set_enabled(false);
-    pPapo->setMoveable(false);
+    //pPapo->setMoveable(false);
     // lock player control
     pPlayer->setMoveable(false);
 

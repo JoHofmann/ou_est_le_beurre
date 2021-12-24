@@ -6,22 +6,26 @@
  */
 
 #include "ou_est_le_beurre/Player.hpp"
-#include "ou_est_le_beurre/Tilemap.hpp"
+#include "ou_est_le_beurre/Game.hpp"
+
 
 #include <iostream>
 #include <cmath>
 
-Player::Player(const std::string &tex_path, std::shared_ptr<Tilemap>& _pTilemap) :
+Player::Player(Game *_game, const std::string &tex_path) :
 	direction(DOWN),
 	ctrl_direction(IDLE),
 	timePerTile(0.7f),
 	offsetTime(0.1f),
 	moveable(true),
-	pTilemap(_pTilemap),
 	moving(false),
 	rot_only(false),
-    moveState(NONE)
+    moveState(NONE),
+	game(_game)
 {
+
+	pTilemap = game->getPTilemap();
+
 	// load whole texture
     if (!texture.loadFromFile(TEXTURES_PATH + tex_path))
     {
@@ -63,7 +67,7 @@ void Player::update(float delta_t) {
 		}
 
 		// trigger observed tile
-		if(inMap(observed.x, observed.y) && sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
+		if(inMap(observed.x, observed.y) && game->isKeyReleased(sf::Keyboard::Enter)) {
 			pTilemap->getTile(observed)->triggerd();
 		}
 
@@ -99,7 +103,8 @@ void Player::moveTile(float delta_t) {
 	static bool inWalk = false;
 	static sf::Vector2f startPos;
 	static float movTime = 0.f;
-	static float rotTime  = 0.f;
+	static float rotTime = 0.f;
+
 
     if(moveState == NONE){
         moving = false;
@@ -145,6 +150,7 @@ void Player::moveTile(float delta_t) {
 
         if(prevDirection != direction) {
             moveState = NONE;
+            moving = false;
             rotTime = 0.f;
         }
 
@@ -152,6 +158,8 @@ void Player::moveTile(float delta_t) {
 
         if(rot_only) {
             moveState = NONE;
+            moving = false;
+            rotTime = 0.f;
         }else{
             if((rotTime >= offsetTime || inWalk)) { // finsished rotatiing
 
@@ -208,6 +216,7 @@ void Player::moveTile(float delta_t) {
 			progress = 1.f;		// set end position fix
             movTime = 0.f;
             moveState = NONE;
+            moving = false;
 
 			ctrl_direction = IDLE;
 		}

@@ -14,8 +14,10 @@
 #include <memory>
 #include "ou_est_le_beurre/globals.hpp"
 #include "ou_est_le_beurre/GameObject.hpp"
+#include "ou_est_le_beurre/Tilemap.hpp"
 
-class Tilemap;
+class Game;
+
 
 enum Direction { DOWN, RIGHT, LEFT, UP, IDLE };
 
@@ -24,7 +26,7 @@ enum MoveState { WALKING, ROTATING, NONE };
 class Player : public GameObject
 {
 public:
-	Player(const std::string &, std::shared_ptr<Tilemap>&);
+	Player(Game *, const std::string &);
 	~Player();
 
     void update(float) override;
@@ -67,6 +69,8 @@ private:
 	bool rot_only;
 
     void setWalkingAnimation(float);
+
+    Game *game;
 	std::shared_ptr<Tilemap> pTilemap;
 };
 
