@@ -18,8 +18,9 @@ public:
 private:
     void processState() override;
     void prepareEpilog();
+    void prepareHust();
 
-    enum States {FADE_IN, EPILOG, FRIDGE, FINISHED};
+    enum States {FADE_IN, HUST, EPILOG, FRIDGE, FINISHED};
     States state = FADE_IN;
     std::shared_ptr<Textbox> pTextbox;
     std::shared_ptr<FadeObject> pFade;

@@ -44,6 +44,7 @@ void ChauAmoreEvent::update(float) {
             }else{
                 // Event is done
                 pPapo->set_enabled(false);
+                pPlayer->setMoveable(true);
                 setActive(false);
             }
         }
@@ -64,6 +65,7 @@ void ChauAmoreEvent::init() {
 
     // define papo walk trajectory
     papoEnterTrajectory.empty();
+    papoEnterTrajectory.push_back(Direction::RIGHT);
     papoEnterTrajectory.push_back(Direction::RIGHT);
     papoEnterTrajectory.push_back(Direction::RIGHT);
     papoEnterTrajectory.push_back(Direction::RIGHT);

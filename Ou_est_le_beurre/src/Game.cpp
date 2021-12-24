@@ -43,7 +43,7 @@ Game::Game()
     gameObjects.push_back(pPapo);
 
     // TODO add all states to states vector
-   //states.push_back(std::make_shared<OpeningState>(this));
+   states.push_back(std::make_shared<OpeningState>(this));
    states.push_back(std::make_shared<ExploringState>(this));
    //std::shared_ptr<TestState> pTestState = std::make_shared<TestState>(this);
    //states.push_back(pTestState);

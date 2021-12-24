@@ -31,12 +31,12 @@ TextboxEvent::TextboxEvent(Game *game, std::vector<std::pair<std::wstring, std::
 
 
 void TextboxEvent::init() {
+
 	if(textbox->isTextIsFinished()) {
 		textbox->set_text(messages_iter->first, messages_iter->second);
 		textbox->set_enabled(true);
-
-        this->setActive(true);
 	}
+    this->setActive(true);
 }
 
 void TextboxEvent::update(float delta_t) {

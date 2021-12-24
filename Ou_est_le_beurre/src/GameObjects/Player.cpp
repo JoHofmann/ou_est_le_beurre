@@ -16,7 +16,7 @@ Player::Player(Game *_game, const std::string &tex_path) :
 	direction(DOWN),
 	ctrl_direction(IDLE),
 	timePerTile(0.7f),
-	offsetTime(0.1f),
+	offsetTime(0.2f),
 	moveable(true),
 	moving(false),
 	rot_only(false),
