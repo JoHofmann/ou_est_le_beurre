@@ -17,6 +17,7 @@ void ChauAmoreEvent::update(float) {
         // TODO show angry textbox
         // TODO walk trajectory
         if (!pPapo->isMoving() && currentState == WALKING_IN) {
+            std::cout << papoEnterTrajectory.size() << std::endl;
             // if there is still some trajectory to walk
             if(!papoEnterTrajectory.empty()){
                 pPapo->setCtrlDirection(papoEnterTrajectory.front(), false);
@@ -61,7 +62,8 @@ void ChauAmoreEvent::init() {
 
     currentState = WALKING_IN;
 
-    // TODO define papo walk trajectory
+    // define papo walk trajectory
+    papoEnterTrajectory.empty();
     papoEnterTrajectory.push_back(Direction::RIGHT);
     papoEnterTrajectory.push_back(Direction::RIGHT);
     papoEnterTrajectory.push_back(Direction::RIGHT);
@@ -69,6 +71,7 @@ void ChauAmoreEvent::init() {
     papoEnterTrajectory.push_back(Direction::RIGHT);
     papoEnterTrajectory.push_back(Direction::RIGHT);
 
+    papoExitTrajectory.empty();
     papoExitTrajectory.push_back(Direction::DOWN);
     papoExitTrajectory.push_back(Direction::LEFT);
     papoExitTrajectory.push_back(Direction::LEFT);

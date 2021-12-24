@@ -81,8 +81,6 @@ void Game::update(float delta_t)
     for(const auto& object : gameObjects) {
     	object->update(delta_t);
 	}
-
-    std::cout << pPapo->isMoving() << std::endl;
 }
 
 void Game::draw(sf::RenderWindow &window)
