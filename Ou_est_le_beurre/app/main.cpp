@@ -29,6 +29,12 @@ int main()
         {
             if (event.type == sf::Event::Closed)
                 window.close();
+
+            game.setKeyReleased(sf::Keyboard::Unknown);
+            if (event.type == sf::Event::KeyReleased)
+            {
+            	game.setKeyReleased(event.key.code);
+            }
         }
 
         // update
