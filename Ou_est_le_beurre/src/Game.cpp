@@ -42,9 +42,6 @@ Game::Game()
     gameObjects.push_back(pFade);
     gameObjects.push_back(pPapo);
 
-    // events
-    eventIndex = -1;	// default -> no event will be updated
-
     // TODO add all states to states vector
    //states.push_back(std::make_shared<OpeningState>(this));
    states.push_back(std::make_shared<ExploringState>(this));
@@ -74,15 +71,15 @@ void Game::update(float delta_t)
     updateStateMachine(delta_t);
 
     // update current event
-    if(eventIndex != -1) {
-    	events[eventIndex]->update(delta_t);
+    for(auto event : events){
+        event->update(delta_t);
     }
 
 
     // TODO update all game objects general
     // update gameObjects
-    for (auto it = gameObjects.begin(); it != gameObjects.end(); ++it) {
-    	(*it)->update(delta_t);
+    for(auto object : gameObjects) {
+    	object->update(delta_t);
 	}
 }
 
@@ -119,16 +116,9 @@ std::vector<std::shared_ptr<Event>> &Game::getEvents() {
 	return events;
 }
 
-
-
-const int Game::getEventIndex() {
-	return eventIndex;
-}
-
-void Game::setEventIndex(int _eventIndex) {
-	eventIndex = _eventIndex;
-    // skip uninitialized events
-    if(eventIndex != -1) {
+void Game::triggerEvent(int eventIndex) {
+    // skip uninitialized events (index = -1)
+    if(eventIndex != -1){
         events[eventIndex]->init();
     }
 }

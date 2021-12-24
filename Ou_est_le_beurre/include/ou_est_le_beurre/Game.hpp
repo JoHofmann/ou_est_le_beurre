@@ -40,8 +40,7 @@ public:
 
     void setEvents(std::vector<std::shared_ptr<Event>> events);
 
-    const int getEventIndex();
-    void setEventIndex(int);
+    void triggerEvent(int);
 
     const std::shared_ptr<Tilemap> &getPTilemap() const;
 
@@ -74,9 +73,6 @@ private:
 
     // tilemap
     std::shared_ptr<Tilemap> pTilemap;
-
-    // events
-    int eventIndex;
 
     std::vector<std::shared_ptr<Event>> events;
 };

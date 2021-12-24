@@ -33,7 +33,7 @@ void Tile::setEventIndex(int _eventIndex) {
 
 void Tile::triggerd() {
 	if(enabled) {
-		game->setEventIndex(eventIndex);
+		game->triggerEvent(eventIndex);
 	}
 }
 

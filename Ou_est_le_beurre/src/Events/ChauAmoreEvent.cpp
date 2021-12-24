@@ -22,20 +22,23 @@ ChauAmoreEvent::ChauAmoreEvent(Game *_game) : Event(), pGame(_game){
 }
 
 void ChauAmoreEvent::update(float) {
-    // TODO show angry textbox
-    // TODO walk trajectory
-    if(!pPapo->isMoving()){
-        pPapo->setCtrlDirection(papoEnterTrajectory.front(), false);
-        papoEnterTrajectory.erase(papoEnterTrajectory.begin());
+    if(isActive()) {
+        // TODO show angry textbox
+        // TODO walk trajectory
+        pPapo->setCtrlDirection(Direction::RIGHT, false);
+        if (!pPapo->isMoving()) {
+            //pPapo->setCtrlDirection(papoEnterTrajectory.front(), false);
+            //papoEnterTrajectory.erase(papoEnterTrajectory.begin());
+        }
+        // TODO open Textbox with chau amore
     }
-    // TODO open Textbox with chau amore
 }
 
 void ChauAmoreEvent::init() {
     // set papo to start pos
     pPapo->setGridPosition(sf::Vector2i(0, 2));
     pPapo->set_enabled(true);
-    pPapo->setMoveable(false);
+    //pPapo->setMoveable(false);
     // lock player control
     pPlayer->setMoveable(false);
     this->setActive(true);
