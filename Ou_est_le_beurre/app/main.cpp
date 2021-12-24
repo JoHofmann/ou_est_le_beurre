@@ -24,13 +24,15 @@ int main()
     	delta_t = clock.restart().asSeconds();
 
         // TODO input
+
+        game.setKeyReleased(sf::Keyboard::Unknown);
+
         sf::Event event;
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
                 window.close();
 
-            game.setKeyReleased(sf::Keyboard::Unknown);
             if (event.type == sf::Event::KeyReleased)
             {
             	game.setKeyReleased(event.key.code);
