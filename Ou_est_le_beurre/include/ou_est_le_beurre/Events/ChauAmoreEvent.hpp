@@ -27,7 +27,8 @@ private:
     std::vector<Direction> papoEnterTrajectory;
     std::vector<Direction> papoExitTrajectory;
 
-    Direction currentDirection;
+    enum ChauAmoreState {WALKING_IN, TALKING, WALKING_BACK};
+    ChauAmoreState currentState;
 };
 
 

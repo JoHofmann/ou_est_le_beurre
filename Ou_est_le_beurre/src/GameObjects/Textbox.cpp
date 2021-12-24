@@ -96,11 +96,12 @@ void Textbox::update(float delta_t)
                         this->set_enabled(false);
                         // indicate that the job of the textbox is done
                         text_is_finished = true;
+                    } else {
+                        drawn_line_counter = 0;
+                        text_pointer_start += text_pointer_length + 1;       // +1 to skip one newline
+                        text_pointer_length = 0;
+                        stop_typing_text = false;
                     }
-                    drawn_line_counter = 0;
-                    text_pointer_start += text_pointer_length + 1;       // +1 to skip one newline
-                    text_pointer_length = 0;
-                    stop_typing_text = false;
                 } else {
                     // show blinking arrow
                     arrow_motion_counter++;
