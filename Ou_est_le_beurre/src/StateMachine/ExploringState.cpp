@@ -21,12 +21,21 @@ void ExploringState::initState() {
     // init events
     std::vector<sf::Vector2i> eventTiles;
 
+    std::vector<std::pair<std::wstring, std::wstring>> dialog;
+
     std::vector<std::shared_ptr<Event>> events;
-    events.push_back(std::make_shared<TextboxEvent>(game, L"Muttern", L"Nein. Hier ist die Butter bestimmt nicht..."));
-    eventTiles.push_back(sf::Vector2i(5, 0));
+ //   events.push_back(std::make_shared<TextboxEvent>(game, L"Muttern", L"Nein. Hier ist die Butter bestimmt nicht..."));
+ //   eventTiles.push_back(sf::Vector2i(5, 0));
 
     events.push_back(std::make_shared<TextboxEvent>(game, L"Vatern", L"Des Bsteck wieder nur in Spühlmaschine reingeschmissen (Grummel Geräusche)"));
     eventTiles.push_back(sf::Vector2i(7, 3));
+
+    dialog.push_back(std::make_pair(L"Muttern", L"hafhoiashdff"));
+    dialog.push_back(std::make_pair(L"Vatern", L"testtedt"));
+
+
+    events.push_back(std::make_shared<TextboxEvent>(game, dialog));
+    eventTiles.push_back(sf::Vector2i(5, 0));
 
     events.push_back(std::make_shared<ChauAmoreEvent>(game));
     eventTiles.push_back(sf::Vector2i(6,5));

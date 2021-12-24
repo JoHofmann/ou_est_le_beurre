@@ -9,6 +9,7 @@
 #include <SFML/Audio.hpp>
 #include <string>
 #include <vector>
+#include <utility>
 #include <memory>
 #include "Events/TextboxEvent.hpp"
 #include "ou_est_le_beurre/globals.hpp"

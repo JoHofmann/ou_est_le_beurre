@@ -133,7 +133,7 @@ void Player::moveTile(float delta_t) {
 
 			static int counter = 0;
 
-			if(++counter >= 5) {
+			if(++counter >= 2) {
 				inWalk = false;
 				counter = 0;
 			}

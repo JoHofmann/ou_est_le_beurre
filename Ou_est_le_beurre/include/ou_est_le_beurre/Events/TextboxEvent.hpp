@@ -10,6 +10,10 @@
 
 #include <string>
 #include <memory>
+#include <vector>
+#include <utility>
+#include <algorithm>
+#include <iterator>
 #include "ou_est_le_beurre/Events/Event.hpp"
 #include "ou_est_le_beurre/Textbox.hpp"
 
@@ -18,6 +22,7 @@ class Game;
 class TextboxEvent : public Event {
 public:
 	TextboxEvent(Game *, std::wstring, std::wstring);
+	TextboxEvent(Game *, std::vector<std::pair<std::wstring, std::wstring>>);
 
 	void init();
 	void update(float) override;
@@ -25,8 +30,8 @@ public:
 private:
 	std::shared_ptr<Textbox> textbox;
 
-	std::wstring textbox_name;
-	std::wstring textbox_text;
+	std::vector<std::pair<std::wstring, std::wstring>> messages;
+	std::vector<std::pair<std::wstring, std::wstring>>::iterator messages_iter;
 
 	Game *game;
 };
