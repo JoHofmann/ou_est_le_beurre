@@ -139,7 +139,6 @@ void Player::moveTile(float delta_t) {
         moving = true;
         rotTime += delta_t;
 
-        sprite.setTextureRect(sf::IntRect(globals::TILESIZE * (3*direction), 0, globals::TILESIZE, globals::TILESIZE));
 
         static Direction prevDirection = IDLE;
 
@@ -192,7 +191,7 @@ void Player::moveTile(float delta_t) {
             }
 
         }
-
+        sprite.setTextureRect(sf::IntRect(globals::TILESIZE * (3*direction), 0, globals::TILESIZE, globals::TILESIZE));
     }
 
     if(moveState == WALKING) {	// executing move
@@ -237,6 +236,9 @@ void Player::moveTile(float delta_t) {
 }
 
 void Player::setWalkingAnimation(float progress){
+    if(progress >= 1.0f){
+        sprite.setTextureRect(sf::IntRect(globals::TILESIZE * (3*direction), 0, globals::TILESIZE, globals::TILESIZE));
+    }
     if(direction == UP || direction == DOWN){
         if(progress < 0.5f){
             sprite.setTextureRect(sf::IntRect(globals::TILESIZE * (3*direction + 1), 0, globals::TILESIZE, globals::TILESIZE));
