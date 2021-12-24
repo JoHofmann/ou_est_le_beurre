@@ -20,7 +20,6 @@ void ExploringState::processState() {
 void ExploringState::initState() {
     // init events
     std::vector<sf::Vector2i> eventTiles;
-    std::vector<std::pair<std::wstring, std::wstring>> dialog;
 
 
     std::vector<std::shared_ptr<Event>> events;
@@ -51,7 +50,7 @@ void ExploringState::initState() {
 
 
     // 2
-    dialog.empty();
+    std::vector<std::pair<std::wstring, std::wstring>> dialog;
     dialog.push_back(std::make_pair(L"Muttern", L"Ach Christoph, ich hab übrigens alle Kontakte aus dem Telefon gelöscht."));
     dialog.push_back(std::make_pair(L"Vatern", L"Dir brennt wohl der Kittel! Und für 60 Euro im Ausland telefoniert…"));
     events.push_back(std::make_shared<TextboxEvent>(game, dialog));
@@ -74,10 +73,10 @@ void ExploringState::initState() {
     events.push_back(std::make_shared<TextboxEvent>(game, L"Muttern", L"Unterm Salem-Aktuell isch DER Butter au it."));
     eventTiles.push_back(sf::Vector2i(4, 4));
 
-    dialog.empty();
-    dialog.push_back(std::make_pair(L"Vatern", L"Will jemand einen Ekschpresso?"));
-    dialog.push_back(std::make_pair(L"Muttern", L"Nein, aber bitte einen kleinen Cappuccino"));
-    events.push_back(std::make_shared<TextboxEvent>(game, dialog));
+    std::vector<std::pair<std::wstring, std::wstring>> dialog2;
+    dialog2.push_back(std::make_pair(L"Vatern", L"Will jemand einen Ekschpresso?"));
+    dialog2.push_back(std::make_pair(L"Muttern", L"Nein, aber bitte einen kleinen Cappuccino"));
+    events.push_back(std::make_shared<TextboxEvent>(game, dialog2));
     eventTiles.push_back(sf::Vector2i(4, 5));
 
     // 5
