@@ -19,6 +19,8 @@ class Tilemap;
 
 enum Direction { DOWN, RIGHT, LEFT, UP, IDLE };
 
+enum MoveState { WALKING, ROTATING, NONE };
+
 class Player : public GameObject
 {
 public:
@@ -59,6 +61,8 @@ private:
 
 	bool moveable;
 	bool moving;
+
+    MoveState moveState;
 
 	bool rot_only;
 

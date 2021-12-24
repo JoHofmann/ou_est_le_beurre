@@ -26,6 +26,8 @@ private:
 
     std::vector<Direction> papoEnterTrajectory;
     std::vector<Direction> papoExitTrajectory;
+
+    Direction currentDirection;
 };
 
 

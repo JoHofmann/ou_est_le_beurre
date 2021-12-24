@@ -19,7 +19,8 @@ Player::Player(const std::string &tex_path, std::shared_ptr<Tilemap>& _pTilemap)
 	moveable(true),
 	pTilemap(_pTilemap),
 	moving(false),
-	rot_only(false)
+	rot_only(false),
+    moveState(NONE)
 {
 	// load whole texture
     if (!texture.loadFromFile(TEXTURES_PATH + tex_path))
@@ -57,6 +58,8 @@ void Player::update(float delta_t) {
 			break;
 		case LEFT:	observed.x -= 1;
 			break;
+            default: std::cerr << "invalid direction (vermutlich IDLE)" << std::endl;
+                break;
 		}
 
 		// trigger observed tile
@@ -92,92 +95,103 @@ bool Player::isMoving() {
 
 
 void Player::moveTile(float delta_t) {
-
-	static bool walking = false;
-	static Direction prevDirection;
 	static sf::Vector2f startPos;
-	static float time = 0.f;
+	static float movTime = 0.f;
 	static float rotTime  = 0.f;
+    if(moveState == NONE){
+        moving = false;
+    }
 
-	// update watch
-	time += delta_t;
+	if(moveState == NONE || moveState == ROTATING) {	// init move
 
-	if(!moving) {	// init move
-
-		startPos = this->getPosition();
 
 		if((ctrl_direction == IDLE && sf::Keyboard::isKeyPressed(sf::Keyboard::W)) || ctrl_direction == UP) { 			// move up
-			direction = UP;
-
-			if(prevDirection != direction && !walking) {
-				time = 0.f;
-			}else if(time >= offsetTime) {
-				time = 0.f;
-
-				if(inMap(gridPostion.x, gridPostion.y - 1) &&
-						!globals::collision_map[gridPostion.y - 1][gridPostion.x]) {	// check if next field is accessable
-
-					if(!rot_only) moving = true;
-				}
-			}
+            direction = UP;
+            moveState = ROTATING;
 		}
+
 		else if((ctrl_direction == IDLE && sf::Keyboard::isKeyPressed(sf::Keyboard::A)) || ctrl_direction == LEFT) {		// move left
-			direction = LEFT;
-
-			if(prevDirection != direction && !walking) {
-				time = 0.f;
-			}else if(time >= offsetTime) {
-				time = 0.f;
-
-				if(inMap(gridPostion.x - 1, gridPostion.y) &&
-						!globals::collision_map[gridPostion.y][gridPostion.x - 1]) {	// check if next field is accessable
-					if(!rot_only) moving = true;
-				}
-			}
+            direction = LEFT;
+            moveState = ROTATING;
 		}
 		else if((ctrl_direction == IDLE && sf::Keyboard::isKeyPressed(sf::Keyboard::S)) || ctrl_direction == DOWN) {		// move down
-			direction = DOWN;
-
-			if(prevDirection != direction && !walking) {
-				time = 0.f;
-			}else if(time >= offsetTime) {
-				time = 0.f;
-
-				if(inMap(gridPostion.x, gridPostion.y + 1) &&
-						!globals::collision_map[gridPostion.y + 1][gridPostion.x]) {	// check if next field is accessable
-					if(!rot_only) moving = true;
-				}
-			}
-		}
+            direction = DOWN;
+            moveState = ROTATING;
+        }
 		else if((ctrl_direction == IDLE && sf::Keyboard::isKeyPressed(sf::Keyboard::D)) || ctrl_direction == RIGHT) {		// move right
-			direction = RIGHT;
-
-			if(prevDirection != direction && !walking) {
-				time = 0.f;
-			}else if(time >= offsetTime) {
-				time = 0.f;
-
-				if(inMap(gridPostion.x + 1, gridPostion.y) &&
-						!globals::collision_map[gridPostion.y][gridPostion.x + 1]) {	// check if next field is accessable
-					if(!rot_only) moving = true;
-				}
-			}
+            direction = RIGHT;
+            moveState = ROTATING;
 		}
+    }
+
+    if(moveState == ROTATING) {
+        moving = true;
+        rotTime += delta_t;
+
         sprite.setTextureRect(sf::IntRect(globals::TILESIZE * (3*direction), 0, globals::TILESIZE, globals::TILESIZE));
 
-		prevDirection = direction;
-		walking = false;
+        static Direction prevDirection = IDLE;
 
-	}else{	// executing move
+        if(prevDirection != direction) {
+            moveState = NONE;
+            rotTime = 0.f;
+        }
 
-		walking = true;
+        prevDirection = direction;
 
-		float progress = time / timePerTile;	// progress [0 - 1]
+        if(rotTime >= offsetTime) { // finsished rotatiing
+
+            startPos = this->getPosition();
+
+            switch (direction) {
+                case UP:
+                    if(inMap(gridPostion.x, gridPostion.y - 1) &&
+                       !globals::collision_map[gridPostion.y - 1][gridPostion.x]) {    // check if next field is accessable
+                        moveState = WALKING;
+                    }
+                    break;
+                case DOWN:
+                    if(inMap(gridPostion.x, gridPostion.y + 1) &&
+                       !globals::collision_map[gridPostion.y + 1][gridPostion.x]) {    // check if next field is accessable
+                        moveState = WALKING;
+                    }
+                        break;
+                case LEFT:
+                    if(inMap(gridPostion.x - 1, gridPostion.y) &&
+                       !globals::collision_map[gridPostion.y][gridPostion.x - 1]) {	// check if next field is accessable
+                        moveState = WALKING;
+                    }
+
+                    break;
+                case RIGHT:
+                    if(inMap(gridPostion.x + 1, gridPostion.y) &&
+                       !globals::collision_map[gridPostion.y][gridPostion.x + 1]) {	// check if next field is accessable
+                        moveState = WALKING;
+                    }
+                    break;
+
+                case IDLE:   // schlecht wenn hier IDLE is
+                    break;
+            }
+
+            rotTime = 0.f;
+        }
+    }
+
+    if(moveState == WALKING) {	// executing move
+
+        moving = true;
+
+        movTime += delta_t;
+
+        float progress = movTime / timePerTile;	// progress [0 - 1]
         setWalkingAnimation(progress);
 
 		if(progress >= 1.f) {	// move completed
 			progress = 1.f;		// set end position fix
-			moving = false;
+            movTime = 0.f;
+            moveState = NONE;
+
 			ctrl_direction = IDLE;
 		}
 

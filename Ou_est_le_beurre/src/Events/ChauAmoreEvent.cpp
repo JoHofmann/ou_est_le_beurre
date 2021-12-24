@@ -9,8 +9,10 @@ ChauAmoreEvent::ChauAmoreEvent(Game *_game) : Event(), pGame(_game){
     pTextbox = pGame->getPTextbox();
     pPapo = pGame->getPPapo();
     pPlayer = pGame->getPlayer();
+    currentDirection = Direction::IDLE;
 
     // TODO define papo walk trajectory
+    papoEnterTrajectory.push_back(Direction::RIGHT);
     papoEnterTrajectory.push_back(Direction::RIGHT);
     papoEnterTrajectory.push_back(Direction::RIGHT);
     papoEnterTrajectory.push_back(Direction::RIGHT);
@@ -21,14 +23,18 @@ ChauAmoreEvent::ChauAmoreEvent(Game *_game) : Event(), pGame(_game){
     //papoExitTrajectory
 }
 
+
 void ChauAmoreEvent::update(float) {
     if(isActive()) {
         // TODO show angry textbox
         // TODO walk trajectory
-        pPapo->setCtrlDirection(Direction::RIGHT, false);
         if (!pPapo->isMoving()) {
-            //pPapo->setCtrlDirection(papoEnterTrajectory.front(), false);
-            //papoEnterTrajectory.erase(papoEnterTrajectory.begin());
+            if(!papoEnterTrajectory.empty()){
+                //std::cout << "traj empty" << std::endl;
+                Direction d = papoEnterTrajectory.front();
+                papoEnterTrajectory.erase(papoEnterTrajectory.begin());
+                pPapo->setCtrlDirection(d, false);
+            }
         }
         // TODO open Textbox with chau amore
     }
