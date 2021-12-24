@@ -95,9 +95,12 @@ bool Player::isMoving() {
 
 
 void Player::moveTile(float delta_t) {
+
+	static bool inWalk = false;
 	static sf::Vector2f startPos;
 	static float movTime = 0.f;
 	static float rotTime  = 0.f;
+
     if(moveState == NONE){
         moving = false;
     }
@@ -121,6 +124,14 @@ void Player::moveTile(float delta_t) {
 		else if((ctrl_direction == IDLE && sf::Keyboard::isKeyPressed(sf::Keyboard::D)) || ctrl_direction == RIGHT) {		// move right
             direction = RIGHT;
             moveState = ROTATING;
+		}else{
+
+			static int counter = 0;
+
+			if(++counter >= 5) {
+				inWalk = false;
+				counter = 0;
+			}
 		}
     }
 
@@ -139,53 +150,59 @@ void Player::moveTile(float delta_t) {
 
         prevDirection = direction;
 
-        if(rotTime >= offsetTime) { // finsished rotatiing
+        if(rot_only) {
+            moveState = NONE;
+        }else{
+            if((rotTime >= offsetTime || inWalk)) { // finsished rotatiing
 
-            startPos = this->getPosition();
+                startPos = this->getPosition();
 
-            switch (direction) {
-                case UP:
-                    if(inMap(gridPostion.x, gridPostion.y - 1) &&
-                       !globals::collision_map[gridPostion.y - 1][gridPostion.x]) {    // check if next field is accessable
-                        moveState = WALKING;
-                    }
-                    break;
-                case DOWN:
-                    if(inMap(gridPostion.x, gridPostion.y + 1) &&
-                       !globals::collision_map[gridPostion.y + 1][gridPostion.x]) {    // check if next field is accessable
-                        moveState = WALKING;
-                    }
+                switch (direction) {
+                    case UP:
+                        if(inMap(gridPostion.x, gridPostion.y - 1) &&
+                           !globals::collision_map[gridPostion.y - 1][gridPostion.x]) {    // check if next field is accessable
+                            moveState = WALKING;
+                        }
                         break;
-                case LEFT:
-                    if(inMap(gridPostion.x - 1, gridPostion.y) &&
-                       !globals::collision_map[gridPostion.y][gridPostion.x - 1]) {	// check if next field is accessable
-                        moveState = WALKING;
-                    }
+                    case DOWN:
+                        if(inMap(gridPostion.x, gridPostion.y + 1) &&
+                           !globals::collision_map[gridPostion.y + 1][gridPostion.x]) {    // check if next field is accessable
+                            moveState = WALKING;
+                        }
+                            break;
+                    case LEFT:
+                        if(inMap(gridPostion.x - 1, gridPostion.y) &&
+                           !globals::collision_map[gridPostion.y][gridPostion.x - 1]) {	// check if next field is accessable
+                            moveState = WALKING;
+                        }
 
-                    break;
-                case RIGHT:
-                    if(inMap(gridPostion.x + 1, gridPostion.y) &&
-                       !globals::collision_map[gridPostion.y][gridPostion.x + 1]) {	// check if next field is accessable
-                        moveState = WALKING;
-                    }
-                    break;
+                        break;
+                    case RIGHT:
+                        if(inMap(gridPostion.x + 1, gridPostion.y) &&
+                           !globals::collision_map[gridPostion.y][gridPostion.x + 1]) {	// check if next field is accessable
+                            moveState = WALKING;
+                        }
+                        break;
 
-                case IDLE:   // schlecht wenn hier IDLE is
-                    break;
+                    case IDLE:   // schlecht wenn hier IDLE is
+                        break;
+                }
+
+                rotTime = 0.f;
             }
 
-            rotTime = 0.f;
         }
+
     }
 
     if(moveState == WALKING) {	// executing move
 
         moving = true;
+        inWalk = true;
 
         movTime += delta_t;
 
         float progress = movTime / timePerTile;	// progress [0 - 1]
-        setWalkingAnimation(progress);
 
 		if(progress >= 1.f) {	// move completed
 			progress = 1.f;		// set end position fix
@@ -194,6 +211,9 @@ void Player::moveTile(float delta_t) {
 
 			ctrl_direction = IDLE;
 		}
+
+        setWalkingAnimation(progress);
+
 
 		switch(direction) {
 		case UP:
